@@ -1,3 +1,41 @@
 <resources>
-    <string name="app_name">PhoneInsideWallpaper</string>
+    <string name="app_name">ColorCircleClock</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="back">Back</string>
+    <string name="showClock">Show clock number</string>
+    <string name="display_2nd_layer">Display 2 circles</string>
+    <string name="display_error">Display easter agg</string>
+    <string name="displayMainShadow">Display main circle shadow</string>
+    <string name="secondLayerSplitCount">Second circle display count:%d</string>
+    <string name="setting">Setting</string>
+
+    <string name="main_theme_color">Main theme color</string>
+
+    <string-array name="colors">
+        <item>Green</item>
+        <item>Purple</item>
+        <item>Orange</item>
+        <item>Blue</item>
+        <item>Rad</item>
+        <item>Barney color</item>
+        <item>Yellow</item>
+    </string-array>
+
+    <string name="wallpaper_author">Lilichuan</string>
+    <string name="wallpaper_description">Divition style clock</string>
+    <string name="showBattery">Display battery on main circle</string>
+
+    <string-array name="error_code">
+        <item>Error:Romeo</item>
+        <item>Error:Delta</item>
+        <item>Error:MIKE</item>
+        <item>Error:Aiden Pearce hacked</item>
+        <item>Error:Bishop hacked</item>
+    </string-array>
+
+    <string name="battery">Bettery</string>
+    <string name="strength">Strength</string>
+
 </resources>

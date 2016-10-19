@@ -72,12 +72,7 @@ public class SetFragment extends Fragment {
             }
         });
 
-        root.findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                backInterface.onBack();
-            }
-        });
+        root.findViewById(R.id.back).setOnClickListener(backInterface);
 
         CheckBox showBattery = (CheckBox)root.findViewById(R.id.showBattery);
         showBattery.setChecked(setting.isShowBattery());
@@ -212,15 +207,10 @@ public class SetFragment extends Fragment {
     }
 
 
-    private BackInterface backInterface;
+    private View.OnClickListener backInterface;
 
-    public void setBackInterface(BackInterface backInterface) {
-        this.backInterface = backInterface;
-    }
-
-    public interface BackInterface{
-
-        void onBack();
+    public void setBackInterface(View.OnClickListener clickBack) {
+        this.backInterface = clickBack;
     }
 
 }

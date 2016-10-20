@@ -56,7 +56,6 @@ public class DrawSecondTool {
                 canvas.drawArc(rectF, totalUnitDegree*i, unitDegree, false, paint );
             }
         }
-        canvas.save();
     }
 
     public void pause(Canvas canvas){

@@ -55,7 +55,6 @@ public class MWallPaperView extends View {
                 wallPaperCreator.draw(canvas);
             }
         }
-        wallPaperCreator.draw(canvas);
     }
 
     public void setPause(boolean pause) {

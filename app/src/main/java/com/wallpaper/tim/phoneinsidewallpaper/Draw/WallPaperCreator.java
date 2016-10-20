@@ -95,6 +95,7 @@ public class WallPaperCreator {
                 drawSecondTool.setRectF(rectF);
                 drawSecondTool.drawCanvas(canvas);
             }
+            canvas.save();
         }
 
     }

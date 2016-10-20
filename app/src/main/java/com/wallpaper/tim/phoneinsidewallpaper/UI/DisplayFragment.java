@@ -61,6 +61,7 @@ public class DisplayFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        wallPaperView.setPause(false);
         timer = new Timer();
 
         timer.schedule(new TimerTask() {

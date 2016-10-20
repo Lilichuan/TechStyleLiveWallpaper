@@ -31,6 +31,16 @@ public class MWallPaperView extends View {
         init(context);
     }
 
+    public MWallPaperView(Context context) {
+        super(context);
+        init(context);
+    }
+
+//    public MWallPaperView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+//        super(context, attrs, defStyleAttr, defStyleRes);
+//        init(context);
+//    }
+
     public void init(Context context){
         wallPaperCreator = new WallPaperCreator(context);
     }

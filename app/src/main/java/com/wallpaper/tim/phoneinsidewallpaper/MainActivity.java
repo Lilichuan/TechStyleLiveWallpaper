@@ -1,14 +1,14 @@
 package com.wallpaper.tim.phoneinsidewallpaper;
 
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
 
 import com.wallpaper.tim.phoneinsidewallpaper.UI.DisplayFragment;
 import com.wallpaper.tim.phoneinsidewallpaper.UI.SetFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity {
 
     public static final int PAGE_DISPLAY = 1;
     public static final int PAGE_SET = 2;
@@ -17,13 +17,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
-
     }
 
-    private void changePage(int page){
+    @Override
+    protected void onStart() {
+        super.onStart();
+        changePage(PAGE_DISPLAY);
+    }
+
+    public void changePage(int page){
         switch (page){
             case PAGE_DISPLAY:
                 changeFragment(DisplayFragment.newInstance());
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 fragment.setBackInterface(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        changePage(PAGE_DISPLAY);
                     }
                 });
                 changeFragment(fragment);
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private void changeFragment(Fragment f){
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.activity_main, f)
+                .replace(R.id.activity_main, f)
                 .commit();
     }
 }

@@ -51,7 +51,7 @@ public class DisplayFragment extends Fragment {
             @Override
             public boolean onLongClick(View v) {
                 MainActivity activity = (MainActivity)getActivity();
-
+                activity.changePage(MainActivity.PAGE_SET);
                 return false;
             }
         });

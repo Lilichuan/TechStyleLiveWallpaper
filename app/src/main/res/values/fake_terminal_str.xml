@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <array name="fake_terminal_str">
 
+    </array>
 </resources>

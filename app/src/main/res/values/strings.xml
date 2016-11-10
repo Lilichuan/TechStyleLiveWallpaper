@@ -24,21 +24,10 @@
     </string-array>
 
     <string name="wallpaper_author">Lilichuan</string>
-    <string name="wallpaper_description">Divition style clock</string>
+    <string name="wallpaper_description">Tech style clock</string>
     <string name="showBattery">Display battery on main circle</string>
-
-    <string-array name="error_code">
-        <item>Error:Romeo</item>
-        <item>Error:Delta</item>
-        <item>Error:MIKE</item>
-        <item>Error:Aiden Pearce hacked</item>
-        <item>Error:Bishop hacked</item>
-    </string-array>
 
     <string name="battery">Bettery</string>
     <string name="strength">Strength</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

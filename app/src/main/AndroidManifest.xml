@@ -15,7 +15,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.SetActivity"></activity>
+
+        <activity android:name=".UI.SetActivity"/>
+
+
+        <service
+            android:name=".TechWallpaperService"
+            android:enabled="true"
+            android:label="Tech Wallpaper"
+            android:permission="android.permission.BIND_WALLPAPER">
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/wallpaper"/>
+        </service>
+
     </application>
 
 </manifest>

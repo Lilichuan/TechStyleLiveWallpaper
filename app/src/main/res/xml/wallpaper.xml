@@ -1,0 +1,5 @@
+<wallpaper xmlns:android="http://schemas.android.com/apk/res/android"
+    android:author="@string/wallpaper_author"
+    android:description="@string/wallpaper_description"
+    android:thumbnail="@mipmap/ic_launcher"
+    android:settingsActivity="com.wallpaper.tim.phoneinsidewallpaper.UI.SetActivity"/>

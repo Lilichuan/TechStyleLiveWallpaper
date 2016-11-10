@@ -19,7 +19,7 @@ public class FakeTerminal {
 
     private Paint paint;
     private String[] texts;
-    private int lastShowTextPosition = 0;
+    private int lastShowTextPosition = -1;
     private static final float TEXT_SIZE = 10;
     private static final float SINGLE_LINE_MARGIN = 2;
     private List<SingleLine> lines;
@@ -90,10 +90,16 @@ public class FakeTerminal {
         }
     }
 
-    private void draw(Canvas canvas){
-        int h = canvas.getHeight();
-        int w = canvas.getWidth();
+    public void draw(Canvas canvas){
+        if(lastShowTextPosition < 0){
+            initLines(canvas.getHeight());
+        }else {
+            initForNewLine();
+        }
 
+        for (SingleLine line : lines){
+            canvas.drawText(line.getStr(), line.getX(), line.getY(), paint);
+        }
     }
 
     private class SingleLine{

@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="fake_terminal_str">
-
+        <item>El sila erin lu e-govaned vin.</item>
+        <item>Gi suilon!</item>
+        <item>Le suilon!</item>
+        <item>Mae lovannen!</item>
+        <item>Iston i nîf lîn</item>
+        <item>Rhun</item>
+        <item>For</item>
+        <item>Har</item>
+        <item>Numen</item>
+        <item>Tolo ar nin</item>
+        <item>Tolo, govano ven</item>
+        <item>Av-osto</item>
+        <item>Pedin i phith in aníron, a nin ú-cheniathog</item>
+        <item>Ni lassui</item>
+        <item>Guren glassui</item>
+        <item>Agoreg vae</item>
+        <item>Agorel vae</item>
+        <item>Odulen an edraith angin</item>
+        <item>Boe de nestad</item>
+        <item>An ngell nîn</item>
+        <item>Gellon ned i galar i chent gîn ned i gladhog</item>
+        <item>Ú-bedin edhellen</item>
     </array>
 </resources>

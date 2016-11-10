@@ -22,6 +22,7 @@ public class WallPaperCreator {
     private Paint textPaint, bigCirclePaint, bigCircleBatteryPaint;
     private DrawSecondTool drawSecondTool;
     private BatteryTool batteryTool;
+    private FakeTerminal fakeTerminal;
     private float textH, splitCircleH;
 
 
@@ -49,6 +50,7 @@ public class WallPaperCreator {
 
         drawSecondTool = new DrawSecondTool(secondSplit, color, setting.getFadeColor());
         batteryTool = new BatteryTool(context);
+        fakeTerminal = new FakeTerminal(context, "#00ff00");
     }
 
 
@@ -95,6 +97,8 @@ public class WallPaperCreator {
                 drawSecondTool.setRectF(rectF);
                 drawSecondTool.drawCanvas(canvas);
             }
+
+            fakeTerminal.draw(canvas);
             canvas.save();
         }
 

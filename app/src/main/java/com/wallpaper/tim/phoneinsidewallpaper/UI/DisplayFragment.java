@@ -69,7 +69,7 @@ public class DisplayFragment extends Fragment {
             public void run() {
                 handler.obtainMessage().sendToTarget();
             }
-        },200,1000);
+        },1000);
     }
 
     @Override

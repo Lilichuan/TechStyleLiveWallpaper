@@ -60,43 +60,43 @@ public class WallPaperCreator {
         if(visible){
 
             canvas.drawColor(Color.parseColor("#000000"));
-            bigCirclePaint.setStrokeWidth(getCircleStrokeW(canvas));
-            float x = canvas.getWidth()/ 2;
-            float y = canvas.getHeight() / 2;
-
-            if(showBattery){
-                bigCircleBatteryPaint.setStrokeWidth(getCircleStrokeW(canvas));
-                canvas.drawCircle(x, y, getBigCircleRadius(canvas), bigCircleBatteryPaint);
-                float r = getBigCircleRadius(canvas);
-                float left = (canvas.getWidth()/2) - r;
-                float top = (canvas.getHeight() / 2) - r;
-                float right = left + (2*r);
-                float btn = top + (2*r);
-                RectF rectF = new RectF(left, top, right, btn);
-                canvas.drawArc(rectF, -90 , (360*batteryTool.getBatteryPct()) ,false, bigCirclePaint );
-            }else {
-                canvas.drawCircle(x, y, getBigCircleRadius(canvas), bigCirclePaint);
-            }
-
-            splitCircleH = getSecondCircleH(canvas);
-
-            if(showText){
-                textH = countTextSize(splitCircleH);
-                textPaint.setTextSize(textH);
-                String s = createNowTimeText();
-                float textLen = textPaint.measureText(s);
-                float x2 = (canvas.getWidth() - textLen)/ 2;
-                float y2 = (canvas.getHeight())/ 2 + (textH / 4);
-                canvas.drawText(s,x2,y2,textPaint);
-            }
-
-            if(showSecondCircle){
-                float leftMargin = (canvas.getWidth() - splitCircleH)/2;
-                float topMargin = (canvas.getHeight() - splitCircleH)/2;
-                RectF rectF = new RectF(leftMargin, topMargin, leftMargin + splitCircleH , topMargin + splitCircleH);
-                drawSecondTool.setRectF(rectF);
-                drawSecondTool.drawCanvas(canvas);
-            }
+//            bigCirclePaint.setStrokeWidth(getCircleStrokeW(canvas));
+//            float x = canvas.getWidth()/ 2;
+//            float y = canvas.getHeight() / 2;
+//
+//            if(showBattery){
+//                bigCircleBatteryPaint.setStrokeWidth(getCircleStrokeW(canvas));
+//                canvas.drawCircle(x, y, getBigCircleRadius(canvas), bigCircleBatteryPaint);
+//                float r = getBigCircleRadius(canvas);
+//                float left = (canvas.getWidth()/2) - r;
+//                float top = (canvas.getHeight() / 2) - r;
+//                float right = left + (2*r);
+//                float btn = top + (2*r);
+//                RectF rectF = new RectF(left, top, right, btn);
+//                canvas.drawArc(rectF, -90 , (360*batteryTool.getBatteryPct()) ,false, bigCirclePaint );
+//            }else {
+//                canvas.drawCircle(x, y, getBigCircleRadius(canvas), bigCirclePaint);
+//            }
+//
+//            splitCircleH = getSecondCircleH(canvas);
+//
+//            if(showText){
+//                textH = countTextSize(splitCircleH);
+//                textPaint.setTextSize(textH);
+//                String s = createNowTimeText();
+//                float textLen = textPaint.measureText(s);
+//                float x2 = (canvas.getWidth() - textLen)/ 2;
+//                float y2 = (canvas.getHeight())/ 2 + (textH / 4);
+//                canvas.drawText(s,x2,y2,textPaint);
+//            }
+//
+//            if(showSecondCircle){
+//                float leftMargin = (canvas.getWidth() - splitCircleH)/2;
+//                float topMargin = (canvas.getHeight() - splitCircleH)/2;
+//                RectF rectF = new RectF(leftMargin, topMargin, leftMargin + splitCircleH , topMargin + splitCircleH);
+//                drawSecondTool.setRectF(rectF);
+//                drawSecondTool.drawCanvas(canvas);
+//            }
 
             fakeTerminal.draw(canvas);
             canvas.save();

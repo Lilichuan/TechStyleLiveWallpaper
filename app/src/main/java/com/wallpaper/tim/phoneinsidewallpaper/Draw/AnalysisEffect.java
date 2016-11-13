@@ -16,8 +16,14 @@ public class AnalysisEffect {
     private float SEPARATE_DEGREE = 5;
     private float STROKE_W = 20;
 
+    private int time_passed = 0;
+    private int ANIMATION_TIME = 4000;
+
     //change 45 degree per second
     private float ANGLE_CHANGE_PER_UNIT = 45;
+
+    //每隔多久就刷新，單位是毫秒
+    public static final int SINGLE_FRAME_TIME = 25;
 
     private RectF smallCircleRect ,bigCircleRect;
 
@@ -31,7 +37,11 @@ public class AnalysisEffect {
         singleRadianDegree = 120 - SEPARATE_DEGREE;
     }
 
-    public void draw(Canvas canvas, int clickX, int clickY){
+    /*
+    *
+    * return: Need to display continue.
+    * */
+    public boolean draw(Canvas canvas, float clickX, float clickY){
         float h = canvas.getHeight();
         float w = canvas.getWidth();
         float bigDiameter = h > w ? h : w;
@@ -40,6 +50,24 @@ public class AnalysisEffect {
 //        canvas.drawArc(getBigCircleRect(bigDiameter, clickX, clickY),
 //                );
 
+
+
+        return after_a_frame();
+    }
+
+    private boolean after_a_frame(){
+        time_passed += SINGLE_FRAME_TIME;
+
+        boolean need_continue = time_passed < ANIMATION_TIME;
+        if(need_continue){
+            time_passed = 0;
+        }
+
+        return need_continue;
+    }
+
+    public boolean isDisplay(){
+        return time_passed > 0;
     }
 
     private RectF getSmallCircleRect(float bigDiameter, int clickX, int clickY){
@@ -68,5 +96,6 @@ public class AnalysisEffect {
 
     public void destroy(){
         bigCircleRect = smallCircleRect = null;
+        time_passed = 0;
     }
 }

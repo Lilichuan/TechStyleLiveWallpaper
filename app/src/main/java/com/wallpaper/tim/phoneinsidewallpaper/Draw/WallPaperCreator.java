@@ -6,7 +6,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.view.MotionEvent;
 
+import com.wallpaper.tim.phoneinsidewallpaper.Set.Colors;
 import com.wallpaper.tim.phoneinsidewallpaper.Set.Setting;
 
 import java.text.SimpleDateFormat;
@@ -24,6 +26,8 @@ public class WallPaperCreator {
     private BatteryTool batteryTool;
     private FakeTerminal fakeTerminal;
     private float textH, splitCircleH;
+    private AnalysisEffect analysisEffect;
+    private MotionEvent motionEvent;
 
 
     public WallPaperCreator(Context context){
@@ -51,6 +55,8 @@ public class WallPaperCreator {
         drawSecondTool = new DrawSecondTool(secondSplit, color, setting.getFadeColor());
         batteryTool = new BatteryTool(context);
         fakeTerminal = new FakeTerminal(context, "#00ff00");
+        analysisEffect = new AnalysisEffect(Colors.BLUE);
+
     }
 
 
@@ -99,6 +105,12 @@ public class WallPaperCreator {
 //            }
 
             fakeTerminal.draw(canvas);
+            if(showClickAnimation()){
+                boolean result = analysisEffect.draw(canvas, motionEvent.getX(), motionEvent.getY());
+                if(!result){
+                    motionEvent = null;
+                }
+            }
             canvas.save();
         }
 
@@ -144,5 +156,15 @@ public class WallPaperCreator {
     public void cleanCanvas(Canvas canvas){
         canvas.drawColor(Color.parseColor("#000000"));
         canvas.save();
+    }
+
+    public void setMotionEvent(MotionEvent me){
+        if(motionEvent.getAction() == MotionEvent.ACTION_BUTTON_PRESS){
+            motionEvent = me;
+        }
+    }
+
+    private boolean showClickAnimation(){
+        return motionEvent != null && analysisEffect.isDisplay();
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.wallpaper.tim.phoneinsidewallpaper.Draw.WallPaperCreator;
@@ -43,6 +44,13 @@ public class MWallPaperView extends View {
 
     public void init(Context context){
         wallPaperCreator = new WallPaperCreator(context);
+        setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                wallPaperCreator.setMotionEvent(motionEvent);
+                return false;
+            }
+        });
     }
 
     @Override

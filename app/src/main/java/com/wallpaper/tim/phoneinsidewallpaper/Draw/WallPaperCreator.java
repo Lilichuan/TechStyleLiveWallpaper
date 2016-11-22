@@ -105,7 +105,7 @@ public class WallPaperCreator {
 //            }
 
             fakeTerminal.draw(canvas);
-            if(showClickAnimation()){
+            if(isShowingClickAnimation()){
                 boolean result = analysisEffect.draw(canvas, motionEvent.getX(), motionEvent.getY());
                 if(!result){
                     motionEvent = null;
@@ -159,12 +159,12 @@ public class WallPaperCreator {
     }
 
     public void setMotionEvent(MotionEvent me){
-        if(motionEvent.getAction() == MotionEvent.ACTION_BUTTON_PRESS){
+        if(me.getAction() == MotionEvent.ACTION_BUTTON_PRESS){
             motionEvent = me;
         }
     }
 
-    private boolean showClickAnimation(){
+    public boolean isShowingClickAnimation(){
         return motionEvent != null && analysisEffect.isDisplay();
     }
 }

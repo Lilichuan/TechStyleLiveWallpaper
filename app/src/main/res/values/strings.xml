@@ -27,7 +27,7 @@
     <string name="wallpaper_description">Tech style clock</string>
     <string name="showBattery">Display battery on main circle</string>
 
-    <string name="battery">Bettery</string>
+    <string name="battery">Battery</string>
     <string name="strength">Strength</string>
 
 </resources>

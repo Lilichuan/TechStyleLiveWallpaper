@@ -7,6 +7,7 @@ import android.service.wallpaper.WallpaperService;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
+import com.wallpaper.tim.phoneinsidewallpaper.Draw.AnalysisEffect;
 import com.wallpaper.tim.phoneinsidewallpaper.Draw.WallPaperCreator;
 
 /**
@@ -41,6 +42,8 @@ public class TechWallpaperService extends WallpaperService {
 
     private class TechEngine extends Engine{
 
+        private static final String TAG = "TechWallpaperService";
+
         private Handler handler = new Handler();
         private Runnable runnable = new Runnable() {
             @Override
@@ -53,11 +56,11 @@ public class TechWallpaperService extends WallpaperService {
         private SurfaceHolder surfaceHolder;
 
         TechEngine(Context context){
-            wallPaperCreator = new WallPaperCreator(context);
+            init(context);
         }
 
-        private void init(){
-
+        private void init(Context context){
+            wallPaperCreator = new WallPaperCreator(context);
         }
 
 
@@ -69,7 +72,11 @@ public class TechWallpaperService extends WallpaperService {
             }
 
             handler.removeCallbacks(runnable);
-            handler.postDelayed(runnable, 1000);
+
+            int delay = wallPaperCreator.isShowingClickAnimation() ?
+                    AnalysisEffect.SINGLE_FRAME_TIME : 1000;
+
+            handler.postDelayed(runnable, delay);
         }
 
         @Override
@@ -85,6 +92,8 @@ public class TechWallpaperService extends WallpaperService {
         @Override
         public void onTouchEvent(MotionEvent event) {
             super.onTouchEvent(event);
+            wallPaperCreator.setMotionEvent(event);
+            handler.postDelayed(runnable, AnalysisEffect.SINGLE_FRAME_TIME);
         }
 
         @Override

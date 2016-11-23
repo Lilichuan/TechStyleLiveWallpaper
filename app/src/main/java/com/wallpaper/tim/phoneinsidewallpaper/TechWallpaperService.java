@@ -92,6 +92,7 @@ public class TechWallpaperService extends WallpaperService {
         @Override
         public void onTouchEvent(MotionEvent event) {
             super.onTouchEvent(event);
+            handler.removeCallbacks(runnable);
             wallPaperCreator.setMotionEvent(event);
             handler.postDelayed(runnable, AnalysisEffect.SINGLE_FRAME_TIME);
         }

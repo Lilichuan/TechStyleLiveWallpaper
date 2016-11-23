@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.wallpaper.tim.phoneinsidewallpaper.Draw.AnalysisEffect;
+import com.wallpaper.tim.phoneinsidewallpaper.Draw.WallPaperCreator;
 import com.wallpaper.tim.phoneinsidewallpaper.MainActivity;
 import com.wallpaper.tim.phoneinsidewallpaper.R;
 
@@ -62,6 +64,10 @@ public class DisplayFragment extends Fragment {
     public void onStart() {
         super.onStart();
         wallPaperView.setPause(false);
+
+        //WallPaperCreator wallPaperCreator = wallPaperView.getWallPaperCreator();
+        //int frame = wallPaperCreator.isShowingClickAnimation() ? AnalysisEffect.SINGLE_FRAME_TIME : 1000;
+
         timer = new Timer();
 
         timer.schedule(new TimerTask() {

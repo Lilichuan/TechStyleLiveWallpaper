@@ -69,4 +69,8 @@ public class MWallPaperView extends View {
         this.pause = pause;
         wallPaperCreator.setVisible(!pause);
     }
+
+    public WallPaperCreator getWallPaperCreator() {
+        return wallPaperCreator;
+    }
 }

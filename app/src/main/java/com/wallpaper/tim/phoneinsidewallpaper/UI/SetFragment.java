@@ -22,8 +22,6 @@ import com.wallpaper.tim.phoneinsidewallpaper.Set.Setting;
 public class SetFragment extends Fragment {
 
     private Setting setting;
-    private View secondLayerArea;
-    private TextView splitCountText;
 
     public SetFragment() {
         // Required empty public constructor
@@ -53,85 +51,11 @@ public class SetFragment extends Fragment {
 
         setting = new Setting(getContext());
 
-        CheckBox showClock = (CheckBox)root.findViewById(R.id.showClock);
-        showClock.setChecked(setting.isShowClock());
-        showClock.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                setting.setShowClock(isChecked);
-            }
-        });
-
-        CheckBox display2ndLayer = (CheckBox)root.findViewById(R.id.show2ndLayer);
-        display2ndLayer.setChecked(setting.getShow2Layer());
-        display2ndLayer.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                setting.setShow2Layer(isChecked);
-                secondLayerArea.setVisibility(isChecked ? View.VISIBLE : View.GONE);
-            }
-        });
-
-        root.findViewById(R.id.back).setOnClickListener(backInterface);
-
-        CheckBox showBattery = (CheckBox)root.findViewById(R.id.showBattery);
-        showBattery.setChecked(setting.isShowBattery());
-        showBattery.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                setting.setShowBattery(isChecked);
-            }
-        });
-
-//        CheckBox displayShadow = (CheckBox)root.findViewById(R.id.showShadow);
-//        displayShadow.setChecked(setting.isShowMainCircleShadow());
-//        displayShadow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//                setting.setShowMainCircleShadow(b);
-//            }
-//        });
-
-        initSecondCircleSettingView(root);
-        initColorSelect(root);
 
         return root;
     }
 
-    private void initSecondCircleSettingView(View root){
-        secondLayerArea = root.findViewById(R.id.secondLayerArea);
-        secondLayerArea.setVisibility(setting.getShow2Layer() ? View.VISIBLE : View.GONE);
-        splitCountText = (TextView)root.findViewById(R.id.splitCountText);
-        SeekBar circleSplitSeekBar = (SeekBar)root.findViewById(R.id.splitCountSeekBar);
-        circleSplitSeekBar.setMax(Setting.CIRCLE_SPLIT_MAX);
-        circleSplitSeekBar.setProgress(setting.get2ndLayerSplit());
-        circleSplitSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if(progress < Setting.CIRCLE_SPLIT_MINI && fromUser){
-                    progress = Setting.CIRCLE_SPLIT_MINI;
-                }
-                setSplitText(progress);
-                setting.set2ndLayerSplit(progress);
-            }
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-        setSplitText(setting.get2ndLayerSplit());
-
-    }
-
-    private void setSplitText(int count){
-        splitCountText.setText(getString(R.string.secondLayerSplitCount, count));
-    }
 
     private void initColorSelect(View root){
         String[] colors = getResources().getStringArray(R.array.colors);

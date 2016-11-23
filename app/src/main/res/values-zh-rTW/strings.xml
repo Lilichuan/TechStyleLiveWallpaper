@@ -20,9 +20,8 @@
     </string-array>
 
     <string name="wallpaper_author">Lilichuan</string>
-    <string name="wallpaper_description">全境封鎖風格時鐘</string>
-    <string name="app_name">圓圈時鐘</string>
-    <string name="display_error">彩蛋</string>
+    <string name="wallpaper_description">科技風格背景</string>
+    <string name="app_name">科技風背景</string>
 
     <string-array name="error_code">
         <item>Error:Romeo</item>

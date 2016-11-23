@@ -3,10 +3,10 @@ package com.wallpaper.tim.phoneinsidewallpaper.Draw;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import com.wallpaper.tim.phoneinsidewallpaper.Set.Colors;
-import com.wallpaper.tim.phoneinsidewallpaper.Set.Setting;
 
 
 public class WallPaperCreator {
@@ -15,15 +15,12 @@ public class WallPaperCreator {
     private AnalysisEffect analysisEffect;
     private MotionEvent motionEvent;
     private boolean visible;
+    private static final String TAG = "WallPaperCreator";
 
 
     public WallPaperCreator(Context context){
-        Setting setting = new Setting(context);
-        String color = setting.getColor();
-
         fakeTerminal = new FakeTerminal(context, "#00ff00");
         analysisEffect = new AnalysisEffect(Colors.YELLOW);
-
     }
 
 
@@ -31,7 +28,6 @@ public class WallPaperCreator {
     public void draw(Canvas canvas){
 
         if(visible){
-
             canvas.drawColor(Color.parseColor("#000000"));
             fakeTerminal.draw(canvas);
 
@@ -48,6 +44,10 @@ public class WallPaperCreator {
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+        Log.d(TAG, "visible = "+visible);
+//        if(!visible){
+//            motionEvent = null;
+//        }
     }
 
     public void cleanCanvas(Canvas canvas){
@@ -56,12 +56,13 @@ public class WallPaperCreator {
     }
 
     public void setMotionEvent(MotionEvent me){
-        if(me.getAction() == MotionEvent.ACTION_BUTTON_PRESS){
+        if(me.getAction() == MotionEvent.ACTION_DOWN
+                && motionEvent == null){
             motionEvent = me;
         }
     }
 
     public boolean isShowingClickAnimation(){
-        return motionEvent != null && analysisEffect.isDisplay();
+        return motionEvent != null;
     }
 }

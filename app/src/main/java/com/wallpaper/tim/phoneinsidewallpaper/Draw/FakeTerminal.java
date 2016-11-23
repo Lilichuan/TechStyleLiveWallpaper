@@ -4,36 +4,32 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Typeface;
 
 import com.wallpaper.tim.phoneinsidewallpaper.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by tim on 2016/11/8.
- */
+
 
 public class FakeTerminal {
 
     private Paint paint;
     private String[] texts;
+    private int textSize;
     private int lastShowTextPosition = -1;
-    private static final float TEXT_SIZE = 10;
     private static final float SINGLE_LINE_MARGIN = 2;
     private List<SingleLine> lines;
 
-    public FakeTerminal(Context context,String color){
+    public FakeTerminal(Context context,String color, int textSize){
+        this.textSize = textSize;
         paint = new Paint();
         paint.setColor(Color.parseColor(color));
         paint.setAntiAlias(false);
         paint.setTextAlign(Paint.Align.LEFT);
-        paint.setTextSize(TEXT_SIZE);
+        paint.setTextSize(textSize);
         texts = context.getResources().getStringArray(R.array.fake_terminal_str);
 
-        //TODO set ttf file
-        //Typeface type = Typeface.createFromAsset(context.getAssets(),"square_sans_serif_7.ttf");
     }
 
     /*
@@ -43,7 +39,7 @@ public class FakeTerminal {
     * */
     private void initLines(float height){
         lines = new ArrayList<>();
-        float lineH_unit = TEXT_SIZE + SINGLE_LINE_MARGIN;
+        float lineH_unit = textSize + SINGLE_LINE_MARGIN;
         int count = (int)(height / lineH_unit);
         lastShowTextPosition = 0;
 

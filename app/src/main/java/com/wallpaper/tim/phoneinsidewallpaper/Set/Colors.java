@@ -13,6 +13,8 @@ public class Colors {
     public static final String BARNEY = "#B00140";
     public static final String YELLOW = "#e0af54";
 
+    public static final String TERMINAL_GREEN = "#00ff00";
+
     public int getLength(){
         return 7;
     }

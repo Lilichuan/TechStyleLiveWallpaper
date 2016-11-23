@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.wallpaper.tim.phoneinsidewallpaper.R;
 import com.wallpaper.tim.phoneinsidewallpaper.Set.Colors;
@@ -18,6 +20,9 @@ import com.wallpaper.tim.phoneinsidewallpaper.Set.Setting;
 public class SetFragment extends Fragment {
 
     private Setting setting;
+
+    private SeekBar terminal_text_size_seek;
+    private TextView terminal_text_size_value;
 
     public SetFragment() {
         // Required empty public constructor
@@ -34,10 +39,7 @@ public class SetFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
+
     }
 
     @Override
@@ -47,83 +49,37 @@ public class SetFragment extends Fragment {
 
         setting = new Setting(getContext());
 
-
-        return root;
-    }
-
-
-
-    private void initColorSelect(View root){
-        String[] colors = getResources().getStringArray(R.array.colors);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.selection_textview, colors);
-        Spinner spinner = (Spinner)root.findViewById(R.id.select_color);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        terminal_text_size_seek = (SeekBar)root.findViewById(R.id.terminal_text_seek_bar);
+        terminal_text_size_seek.setMax(Setting.TERMINAL_TEXT_BIGGEST);
+        terminal_text_size_seek.setProgress(setting.getTerminalTextSize());
+        terminal_text_size_seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String s;
-                switch (position){
-                    case 0:
-                        s = Colors.GREEN;
-                        break;
-                    case 1:
-                        s = Colors.PURPLE;
-                        break;
-                    case 2:
-                        s = Colors.ORANGE;
-                        break;
-                    case 3:
-                        s = Colors.BLUE;
-                        break;
-                    case 4:
-                        s = Colors.RAD;
-                        break;
-                    case 5:
-                        s = Colors.BARNEY;
-                        break;
-                    case 6:
-                        s = Colors.YELLOW;
-                        break;
-                    default:
-                        s = Colors.ORANGE;
+            public void onProgressChanged(SeekBar seekBar, int i, boolean fromUser) {
+                if(fromUser){
+                    if(i < Setting.TERMINAL_TEXT_SMALLEST){
+                        i = Setting.TERMINAL_TEXT_SMALLEST;
+                        seekBar.setProgress(Setting.TERMINAL_TEXT_SMALLEST);
+                    }
+                    terminal_text_size_value.setText("" + i);
                 }
 
-                setting.setColor(s);
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onStartTrackingTouch(SeekBar seekBar) {
 
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                setting.setTerminalTextSize(seekBar.getProgress());
             }
         });
 
-        int position;
+        terminal_text_size_value = (TextView)root.findViewById(R.id.terminal_text_size_value);
 
-        switch (setting.getColor()){
-            case Colors.GREEN:
-                position = 0;
-                break;
-            case Colors.PURPLE:
-                position = 1;
-                break;
-            case Colors.ORANGE:
-                position = 2;
-                break;
-            case Colors.BLUE:
-                position = 3;
-                break;
-            case Colors.RAD:
-                position = 4;
-                break;
-            case Colors.BARNEY:
-                position = 5;
-                break;
-            default:
-                position = 2;
-        }
-
-
-        spinner.setSelection(position);
+        root.findViewById(R.id.back).setOnClickListener(backInterface);
+        return root;
     }
 
 

@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
+import com.wallpaper.tim.phoneinsidewallpaper.Set.Setting;
+
 public class AnalysisEffect {
 
     private Paint paint;
@@ -13,7 +15,7 @@ public class AnalysisEffect {
     private float STROKE_W = 20;
 
     private int time_passed = 0;
-    private final int ANIMATION_TIME = 4000;
+
     private final int ROTATE_DEGREE_PER_FRAME = 7;
     private final int CIRCLE_SPLIT = 3;
 
@@ -58,7 +60,7 @@ public class AnalysisEffect {
         int temp_start = startDegree;
 
         for (int i = 0 ;i < CIRCLE_SPLIT; i++){
-            canvas.drawArc(rectF, temp_start, singleRadianDegree, true, paint);
+            canvas.drawArc(rectF, temp_start, singleRadianDegree, false, paint);
             temp_start += singleRadianDegree;
             temp_start += SEPARATE_DEGREE;
         }
@@ -72,12 +74,12 @@ public class AnalysisEffect {
             bigCircleStartAngle -= 360;
         }
 
-        smallCircleStartAngle += ROTATE_DEGREE_PER_FRAME;
-        if(smallCircleStartAngle > 360){
-            smallCircleStartAngle -= 360;
+        smallCircleStartAngle -= ROTATE_DEGREE_PER_FRAME;
+        if(smallCircleStartAngle < 0){
+            smallCircleStartAngle = 360;
         }
 
-        boolean need_continue = time_passed < ANIMATION_TIME;
+        boolean need_continue = time_passed < Setting.ANIMATION_TIME;
         if(!need_continue){
             reset();
         }
@@ -117,6 +119,6 @@ public class AnalysisEffect {
         bigCircleRect = smallCircleRect = null;
         time_passed = 0;
         bigCircleStartAngle = 0;
-        smallCircleStartAngle = 0;
+        smallCircleStartAngle = 360;
     }
 }

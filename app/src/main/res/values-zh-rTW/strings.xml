@@ -36,4 +36,7 @@
     <string name="battery">電量</string>
     <string name="strength">精神力</string>
 
+    <string name="terminal_text_size">終端機文字大小</string>
+    <string name="terminal_text_color">終端機文字顏色</string>
+
 </resources>

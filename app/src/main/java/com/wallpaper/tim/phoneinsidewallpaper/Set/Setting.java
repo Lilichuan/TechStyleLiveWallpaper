@@ -17,12 +17,14 @@ public class Setting {
     private static final String KEY_THEME_COLOR = "color";
 
     private static final String KEY_SHOW_CLOCK = "showClock";
-    private static final String KEY_DISPLAY_2_LAYER = "secondLayer";
-    private static final String KEY_2_LAYER_COUNT = "secondLayerCount";
-    private static final String KEY_SHOW_BATTERY = "showBattery";
+    private static final String KEY_TERMINAL_TEXT_COLOR = "terminal_text_color";
+    private static final String KEY_TERMINAL_TEXT_SIZE = "terminal_text_size";
+    private static final String KEY_TERMINAL_BG_COLOR = "terminal_bg_color";
 
-    public static final int CIRCLE_SPLIT_MAX = 180;
-    public static final int CIRCLE_SPLIT_MINI = 3;
+    public static final int TERMINAL_TEXT_SMALLEST = 10;
+    public static final int TERMINAL_TEXT_BIGGEST = 60;
+
+    public static final int ANIMATION_TIME = 4000;
 
     public Setting(Context context){
         sp = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
@@ -40,20 +42,25 @@ public class Setting {
         return sp.getString(KEY_THEME_COLOR, Colors.BLUE);
     }
 
-
-    /*
-    *
-    * Display clock setting
-    * */
-    public void setShowClock(boolean show){
-        sp.edit().putBoolean(KEY_SHOW_CLOCK, show).apply();
+    public void setTerminalTextColor(String color){
+        sp.edit().putString(KEY_TERMINAL_TEXT_COLOR, color).apply();
     }
 
-    public boolean isShowClock(){
-        return sp.getBoolean(KEY_SHOW_CLOCK, true);
+    public String getTerminalTextColor() {
+        return sp.getString(KEY_TERMINAL_TEXT_COLOR, Colors.TERMINAL_GREEN);
     }
 
+    public void set_terminal_BG_color(String color){
+        sp.edit().putString(KEY_TERMINAL_BG_COLOR, color).apply();
+    }
 
+    public void setTerminalTextSize(int size){
+        sp.edit().putInt(KEY_TERMINAL_TEXT_SIZE, size).apply();
+    }
+
+    public int getTerminalTextSize(){
+        return sp.getInt(KEY_TERMINAL_TEXT_SIZE, TERMINAL_TEXT_SMALLEST);
+    }
 
     public static String getFadeColor(String selectColor){
         String color;

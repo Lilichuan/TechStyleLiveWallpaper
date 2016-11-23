@@ -3,10 +3,10 @@ package com.wallpaper.tim.phoneinsidewallpaper.Draw;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import com.wallpaper.tim.phoneinsidewallpaper.Set.Colors;
+import com.wallpaper.tim.phoneinsidewallpaper.Set.Setting;
 
 
 public class WallPaperCreator {
@@ -17,24 +17,21 @@ public class WallPaperCreator {
     private boolean visible;
     private static final String TAG = "WallPaperCreator";
 
-
     public WallPaperCreator(Context context){
-        fakeTerminal = new FakeTerminal(context, "#00ff00");
+        Setting setting = new Setting(context);
+        fakeTerminal = new FakeTerminal(context, Colors.TERMINAL_GREEN, setting.getTerminalTextSize());
         analysisEffect = new AnalysisEffect(Colors.YELLOW);
     }
-
-
 
     public void draw(Canvas canvas){
 
         if(visible){
-            canvas.drawColor(Color.parseColor("#000000"));
-            fakeTerminal.draw(canvas);
-
+            drawTerminal(canvas);
             if(isShowingClickAnimation()){
                 boolean result = analysisEffect.draw(canvas, motionEvent.getX(), motionEvent.getY());
                 if(!result){
                     motionEvent = null;
+                    drawTerminal(canvas);
                 }
             }
             canvas.save();
@@ -42,12 +39,17 @@ public class WallPaperCreator {
 
     }
 
+    private void drawTerminal(Canvas canvas){
+        canvas.drawColor(Color.parseColor("#000000"));
+        fakeTerminal.draw(canvas);
+    }
+
+
     public void setVisible(boolean visible) {
         this.visible = visible;
-        Log.d(TAG, "visible = "+visible);
-//        if(!visible){
-//            motionEvent = null;
-//        }
+        if(!visible){
+            motionEvent = null;
+        }
     }
 
     public void cleanCanvas(Canvas canvas){

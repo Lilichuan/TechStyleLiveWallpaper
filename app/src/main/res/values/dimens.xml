@@ -15,4 +15,6 @@
     <dimen name="widget_h">100dp</dimen>
     <dimen name="widget_max_h">170dp</dimen>
 
+    <dimen name="normal_margin">10dp</dimen>
+
 </resources>

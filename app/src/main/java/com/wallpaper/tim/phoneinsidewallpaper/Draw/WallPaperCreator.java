@@ -20,7 +20,7 @@ public class WallPaperCreator {
     public WallPaperCreator(Context context){
         Setting setting = new Setting(context);
         fakeTerminal = new FakeTerminal(context, Colors.TERMINAL_GREEN, setting.getTerminalTextSize());
-        analysisEffect = new AnalysisEffect(Colors.YELLOW);
+        analysisEffect = new AnalysisEffect(Colors.BLUE);
     }
 
     public void draw(Canvas canvas){
@@ -48,6 +48,7 @@ public class WallPaperCreator {
     public void setVisible(boolean visible) {
         this.visible = visible;
         if(!visible){
+            analysisEffect.reset();
             motionEvent = null;
         }
     }

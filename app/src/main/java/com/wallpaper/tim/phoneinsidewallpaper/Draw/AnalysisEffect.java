@@ -16,15 +16,25 @@ public class AnalysisEffect {
 
     private int time_passed = 0;
 
-    private final int ROTATE_DEGREE_PER_FRAME = 7;
+    //每一個影格要讓圈圈轉多少角度
+    private final int ROTATE_DEGREE_PER_FRAME = 2;
+    //圈圈分裂成幾段
     private final int CIRCLE_SPLIT = 3;
 
+    //紀錄當下圈圈旋轉的角度，值0~360
     private int bigCircleStartAngle, smallCircleStartAngle;
 
     //每隔多久就刷新，單位是毫秒
     public static final int SINGLE_FRAME_TIME = 25;
 
     private RectF smallCircleRect ,bigCircleRect;
+
+    private final int DIRECTION_LEFT_TOP = 1;
+    private final int DIRECTION_LEFT_DOWN = 2;
+    private final int DIRECTION_RIGHT_TOP = 3;
+    private final int DIRECTION_RIGHT_DOWN = 4;
+
+    private int direction_info_window = -1;
 
     public AnalysisEffect(String color){
         paint = new Paint();
@@ -40,6 +50,7 @@ public class AnalysisEffect {
     /*
     *
     * return: Need to display continue.
+    * 回傳值：是否繼續呈現動畫
     * */
     public boolean draw(Canvas canvas, float clickX, float clickY){
         float h = canvas.getHeight();
@@ -53,7 +64,26 @@ public class AnalysisEffect {
         drawCircle(canvas, bigRect, bigCircleStartAngle);
         drawCircle(canvas, smallRect, smallCircleStartAngle);
 
+        calculate_small_window_direction(canvas, clickX, clickY);
+
         return after_a_frame();
+    }
+
+    private void calculate_small_window_direction(Canvas canvas, float clickX, float clickY){
+        float toLeft, toRight, toTop, toBottom;
+        toLeft = clickX;
+        toRight = canvas.getWidth() - clickX;
+        toTop = clickY;
+        toBottom = canvas.getHeight() - clickY;
+
+        boolean top = toTop >= toBottom;
+        boolean left = toLeft >= toRight;
+
+        if(top){
+            direction_info_window = left ? DIRECTION_LEFT_TOP : DIRECTION_RIGHT_TOP;
+        }else {
+            direction_info_window = left ? DIRECTION_LEFT_DOWN : DIRECTION_RIGHT_DOWN;
+        }
     }
 
     private void drawCircle(Canvas canvas, RectF rectF, int startDegree){
@@ -87,10 +117,6 @@ public class AnalysisEffect {
         return need_continue;
     }
 
-    public boolean isDisplay(){
-        return time_passed > 0;
-    }
-
     private RectF getSmallCircleRect(float bigDiameter, float clickX, float clickY){
         if(smallCircleRect != null){
             return smallCircleRect;
@@ -115,10 +141,11 @@ public class AnalysisEffect {
         return new RectF(clickX - radius ,clickY - radius ,clickX + radius , clickY + radius);
     }
 
-    private void reset(){
+    public void reset(){
         bigCircleRect = smallCircleRect = null;
         time_passed = 0;
         bigCircleStartAngle = 0;
         smallCircleStartAngle = 360;
+        direction_info_window = -1;
     }
 }

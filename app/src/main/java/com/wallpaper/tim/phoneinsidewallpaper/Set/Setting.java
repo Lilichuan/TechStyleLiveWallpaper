@@ -26,11 +26,13 @@ public class Setting {
 
     public static final int ANIMATION_TIME = 4000;
 
+    public static final int LINE_CHART_STROKE = 30;
+
     public Setting(Context context){
         sp = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
     }
 
-    public void setColor(String color){
+    public void setThemeColor(String color){
         if(TextUtils.isEmpty(color)){
             return;
         }
@@ -38,8 +40,12 @@ public class Setting {
         sp.edit().putString(KEY_THEME_COLOR, color).apply();
     }
 
-    public String getColor(){
+    public String getThemeColor(){
         return sp.getString(KEY_THEME_COLOR, Colors.BLUE);
+    }
+
+    public String getFadeColor(){
+        return getFadeColor(getThemeColor());
     }
 
     public void setTerminalTextColor(String color){

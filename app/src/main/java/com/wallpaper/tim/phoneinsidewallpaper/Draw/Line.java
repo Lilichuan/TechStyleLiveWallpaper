@@ -26,7 +26,7 @@ public class Line {
     public void initPaint(){
         paint = new Paint();
         paint.setAntiAlias(true);
-        paint.setColor(Color.parseColor(setting.getColor()));
+        paint.setColor(Color.parseColor(setting.getThemeColor()));
         paint.setStrokeWidth(strokeW);
         paint.setStyle(Paint.Style.STROKE);
     }

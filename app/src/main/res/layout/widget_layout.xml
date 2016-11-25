@@ -2,30 +2,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/circle"
+        android:id="@+id/window_edge"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:layout_margin="10dp"/>
+        android:layout_height="match_parent"/>
 
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textColor="@color/white"
-        android:textSize="@dimen/normal_text_size"/>
+        android:layout_margin="@dimen/normal_margin"
+        android:textSize="@dimen/normal_text_size"
+        android:layout_alignParentTop="true"
+        android:text="@string/battery"/>
 
-    <TextView
-        android:id="@+id/text2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/line_chart"
+        android:layout_width="match_parent"
+        android:layout_height="30dip"
         android:layout_below="@+id/text"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/white"
-        android:textSize="@dimen/small_text_size"/>
+        android:layout_marginLeft="@dimen/normal_margin"
+        android:layout_marginRight="@dimen/normal_margin"/>
 
 </RelativeLayout>

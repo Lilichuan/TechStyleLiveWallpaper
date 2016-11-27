@@ -67,7 +67,7 @@ public class BatteryWidgetProvider extends AppWidgetProvider {
 
 
     private final int SPLIT_COUNT = 10;
-    private final int margin = 5;
+    private final int margin = 20;
     private Bitmap drawChart(int w, int h, float percent){
         Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_4444);
         Canvas chartCanvas = new Canvas(bitmap);

@@ -3,6 +3,7 @@ package com.wallpaper.tim.phoneinsidewallpaper.Widget;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.RemoteViews;
 
@@ -76,6 +77,7 @@ public class CircleWidgetProvider extends AppWidgetProvider {
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout_2);
         views.setTextViewText(R.id.text, text);
+        views.setTextColor(R.id.text, Color.parseColor(setting.getThemeColor()));
         views.setImageViewBitmap(R.id.circle, widgetTool.draw(adjustDayOfWeek, (float) adjustDayOfWeek / 7f));
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }

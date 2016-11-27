@@ -86,6 +86,10 @@ public class FakeTerminal {
         }
     }
 
+    public void reset(){
+        lastShowTextPosition = -1;
+    }
+
     public void draw(Canvas canvas){
         if(lastShowTextPosition < 0){
             initLines(canvas.getHeight());

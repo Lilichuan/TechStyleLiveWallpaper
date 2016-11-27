@@ -8,6 +8,7 @@ import android.widget.RemoteViews;
 
 import com.wallpaper.tim.phoneinsidewallpaper.R;
 import com.wallpaper.tim.phoneinsidewallpaper.Set.Colors;
+import com.wallpaper.tim.phoneinsidewallpaper.Set.Setting;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -37,7 +38,9 @@ public class CircleWidgetProvider extends AppWidgetProvider {
         Bundle bundle = appWidgetManager.getAppWidgetOptions(appWidgetId);
         int h = bundle.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT);
 
-        widgetTool = new WidgetTool(context, Colors.BLUE , h, 7);
+        Setting setting = new Setting(context);
+
+        widgetTool = new WidgetTool(context, setting.getThemeColor() , h, 7);
 
         Calendar calendar = Calendar.getInstance(Locale.TAIWAN);
 

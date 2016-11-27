@@ -61,8 +61,8 @@ public class AnalysisEffect {
         RectF bigRect = getBigCircleRect(bigDiameter, clickX, clickY);
         RectF smallRect = getSmallCircleRect(bigDiameter,clickX, clickY);
 
-        drawCircle(canvas, bigRect, bigCircleStartAngle);
-        drawCircle(canvas, smallRect, smallCircleStartAngle);
+        drawCircle(canvas, bigRect, bigCircleStartAngle, STROKE_W);
+        drawCircle(canvas, smallRect, smallCircleStartAngle, STROKE_W / 2);
 
         calculate_small_window_direction(canvas, clickX, clickY);
 
@@ -86,8 +86,10 @@ public class AnalysisEffect {
         }
     }
 
-    private void drawCircle(Canvas canvas, RectF rectF, int startDegree){
+    private void drawCircle(Canvas canvas, RectF rectF, int startDegree, float stroke_w){
         int temp_start = startDegree;
+
+        paint.setStrokeWidth(stroke_w);
 
         for (int i = 0 ;i < CIRCLE_SPLIT; i++){
             canvas.drawArc(rectF, temp_start, singleRadianDegree, false, paint);

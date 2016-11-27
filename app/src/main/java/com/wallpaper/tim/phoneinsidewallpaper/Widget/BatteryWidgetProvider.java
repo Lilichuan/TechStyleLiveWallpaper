@@ -14,7 +14,6 @@ import android.widget.RemoteViews;
 import com.wallpaper.tim.phoneinsidewallpaper.Draw.BatteryTool;
 import com.wallpaper.tim.phoneinsidewallpaper.Draw.TechEdge;
 import com.wallpaper.tim.phoneinsidewallpaper.R;
-import com.wallpaper.tim.phoneinsidewallpaper.Set.Colors;
 import com.wallpaper.tim.phoneinsidewallpaper.Set.Setting;
 
 

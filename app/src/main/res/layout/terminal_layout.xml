@@ -9,8 +9,7 @@
 
     <ImageView
         android:id="@+id/terminal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        style="@style/widget_edge"
         android:layout_margin="@dimen/normal_margin"/>
 
 </RelativeLayout>

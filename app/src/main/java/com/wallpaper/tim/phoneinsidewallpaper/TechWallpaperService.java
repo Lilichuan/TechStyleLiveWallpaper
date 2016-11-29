@@ -16,25 +16,6 @@ import com.wallpaper.tim.phoneinsidewallpaper.Draw.WallPaperCreator;
 
 public class TechWallpaperService extends WallpaperService {
 
-
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-
-
     @Override
     public Engine onCreateEngine() {
         return new TechEngine(this);
@@ -100,7 +81,6 @@ public class TechWallpaperService extends WallpaperService {
         @Override
         public void onDestroy() {
             super.onDestroy();
-            wallPaperCreator.setVisible(false);
             handler.removeCallbacks(runnable);
         }
 

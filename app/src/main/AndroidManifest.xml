@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".UI.SetActivity"/>
+        <activity android:name=".UI.SetActivity"
+            android:exported="true"/>
 
 
         <service

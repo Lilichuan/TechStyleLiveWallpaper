@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="art_of_war">
+        <item>兵者，國之大事，死生之地，存亡之道，不可不察也。</item>
+        <item>故經之以五，校之以計，而索其情：</item>
+        <item>一曰道，二曰天，三曰地，四曰將，五曰法。</item>
+        <item>道者，令民于上同意者也</item>
+        <item>可與之死，可與之生，民不詭也</item>
+        <item>天者，陰陽、寒暑、時制也</item>
+        <item>地者，高下、遠近、險易、廣狹、死生也</item>
+        <item>將者，智、信、仁、勇、嚴也</item>
+        <item>法者，曲制、官道、主用也</item>
+        <item>凡此五者，將莫不聞，知之者勝，不知之者不勝</item>
+        <item>故校之以計，而索其情</item>
+        <item>曰：主孰有道，將孰有能</item>
+        <item>天地孰得，法令孰行</item>
+        <item>兵眾孰強，士卒孰練，賞罰孰明，吾以此知勝負矣</item>
+        <item>將聽吾計，用之必勝，留之</item>
+        <item>將不聽吾計，用之必敗，去之</item>
+        <item>計利以聽，乃為之勢，以佐其外</item>
+        <item>勢者，因利而制權也</item>
+        <item>兵者，詭道也</item>
+        <item>故能而示之不能，用而示之不用</item>
+        <item>近而示之遠，遠而示之近</item>
+        <item>利而誘之，亂而取之，實而備之，強而避之</item>
+        <item>怒而撓之，卑而驕之，佚而勞之，親而離之</item>
+        <item>攻其不備，出其不意。此兵家之勝，不可先傳也</item>
+
+    </array>
+</resources>
+
+<!--
+<item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+
+
+-->

@@ -12,7 +12,11 @@ public class SetActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         SetFragment fragment = SetFragment.newInstance();
         fragment.setBackInterface(new View.OnClickListener() {
             @Override
@@ -23,7 +27,7 @@ public class SetActivity extends FragmentActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.activity_set, fragment)
+                .replace(R.id.activity_set_id, fragment)
                 .commit();
     }
 }

@@ -28,7 +28,7 @@ public class FakeTerminal {
         paint.setAntiAlias(false);
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTextSize(textSize);
-        texts = context.getResources().getStringArray(R.array.fake_terminal_str);
+        texts = context.getResources().getStringArray(R.array.art_of_war);
 
     }
 

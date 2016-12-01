@@ -63,7 +63,7 @@ public class TerminalWidgetProvider extends AppWidgetProvider {
         Setting setting = new Setting(context);
         TechEdge techEdge = new TechEdge(setting.getThemeColor());
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.terminal_layout);
-        views.setImageViewBitmap(R.id.window_edge, techEdge.normalEdge(w, h));
+        views.setImageViewBitmap(R.id.window_edge, techEdge.techEdge(w, h));
         views.setImageViewBitmap(R.id.terminal, drawTerminal(w, h));
 
         appWidgetManager.updateAppWidget(appWidgetId, views);

@@ -60,7 +60,7 @@ public class BatteryWidgetProvider extends AppWidgetProvider {
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
         views.setTextColor(R.id.text, Color.parseColor(setting.getThemeColor()));
-        views.setImageViewBitmap(R.id.window_edge, techEdge.normalEdge(w, h));
+        views.setImageViewBitmap(R.id.window_edge, techEdge.techEdge(w, h));
         views.setImageViewBitmap(R.id.line_chart, drawChart(w, Setting.LINE_CHART_STROKE, select));
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }

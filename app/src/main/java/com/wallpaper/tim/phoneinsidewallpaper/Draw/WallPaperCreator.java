@@ -81,10 +81,14 @@ public class WallPaperCreator {
     public void setVisible(boolean visible) {
         this.visible = visible;
         if(!visible){
-            analysisEffect.reset();
-            motionEvent = null;
-            smallCircleRectF = null;
+            clear();
         }
+    }
+
+    public void clear(){
+        analysisEffect.reset();
+        motionEvent = null;
+        smallCircleRectF = null;
     }
 
     public void cleanCanvas(Canvas canvas){

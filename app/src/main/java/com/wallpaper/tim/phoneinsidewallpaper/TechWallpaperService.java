@@ -67,10 +67,7 @@ public class TechWallpaperService extends WallpaperService {
             super.onSurfaceChanged(holder, format, width, height);
             surfaceHolder = holder;
             Canvas canvas = holder.lockCanvas();
-            if(wallPaperCreator == null){
-                wallPaperCreator = new WallPaperCreator(getApplicationContext());
-            }
-            getWallPaperCreator().setVisible(true);
+            wallPaperCreator = null;//reset
             getWallPaperCreator().draw(canvas);
             holder.unlockCanvasAndPost(canvas);
         }
@@ -92,12 +89,11 @@ public class TechWallpaperService extends WallpaperService {
         @Override
         public void onVisibilityChanged(boolean visible) {
             super.onVisibilityChanged(visible);
+            getWallPaperCreator().setVisible(visible);
             if (visible) {
-                getWallPaperCreator();
                 handler.post(runnable);
             } else {
                 handler.removeCallbacks(runnable);
-                //wallPaperCreator = null;
             }
         }
 

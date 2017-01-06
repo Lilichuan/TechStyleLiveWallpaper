@@ -16,6 +16,8 @@ import com.wallpaper.tim.phoneinsidewallpaper.Draw.WallPaperCreator;
 
 public class TechWallpaperService extends WallpaperService {
 
+
+
     @Override
     public Engine onCreateEngine() {
         return new TechEngine(this);
@@ -65,8 +67,11 @@ public class TechWallpaperService extends WallpaperService {
             super.onSurfaceChanged(holder, format, width, height);
             surfaceHolder = holder;
             Canvas canvas = holder.lockCanvas();
-            wallPaperCreator.setVisible(true);
-            wallPaperCreator.draw(canvas);
+            if(wallPaperCreator == null){
+                wallPaperCreator = new WallPaperCreator(getApplicationContext());
+            }
+            getWallPaperCreator().setVisible(true);
+            getWallPaperCreator().draw(canvas);
             holder.unlockCanvasAndPost(canvas);
         }
 
@@ -88,10 +93,20 @@ public class TechWallpaperService extends WallpaperService {
         public void onVisibilityChanged(boolean visible) {
             super.onVisibilityChanged(visible);
             if (visible) {
+                getWallPaperCreator();
                 handler.post(runnable);
             } else {
                 handler.removeCallbacks(runnable);
+                //wallPaperCreator = null;
             }
+        }
+
+        private WallPaperCreator getWallPaperCreator(){
+            if(wallPaperCreator == null){
+                wallPaperCreator = new WallPaperCreator(getApplicationContext());
+            }
+
+            return wallPaperCreator;
         }
 
 

@@ -37,11 +37,7 @@ public class DrawSecondTool {
         unitDegree = totalUnitDegree - SEPARATE_DEGREE;
     }
 
-    public void drawCanvas(Canvas canvas){
-        int PAINT_STROKE_W = 20 ;
-        if(rectF == null){
-            rectF = new RectF(PAINT_STROKE_W, PAINT_STROKE_W, canvas.getWidth() - PAINT_STROKE_W, canvas.getHeight() - PAINT_STROKE_W);
-        }
+    public void drawCanvas(RectF rectF, Canvas canvas){
 
         selectUnit++;
         if(selectUnit + 1 > arcCount){
@@ -63,12 +59,4 @@ public class DrawSecondTool {
         canvas.save();
     }
 
-//    public void resetSplitCount(int count){
-//        selectUnit = 0;
-//        arcCount = count;
-//    }
-
-    public void setRectF(RectF rectF) {
-        this.rectF = rectF;
-    }
 }

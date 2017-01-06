@@ -74,6 +74,8 @@ public class SetFragment extends Fragment {
 
         terminal_text_size_value = (TextView)root.findViewById(R.id.terminal_text_size_value);
 
+        initSecondCircleSettingView(root);
+
         root.findViewById(R.id.back).setOnClickListener(backInterface);
         return root;
     }
@@ -83,6 +85,41 @@ public class SetFragment extends Fragment {
 
     public void setBackInterface(View.OnClickListener clickBack) {
         this.backInterface = clickBack;
+    }
+
+    private TextView splitCountText;
+
+    private void initSecondCircleSettingView(View root){
+        splitCountText = (TextView)root.findViewById(R.id.splitCountText);
+        SeekBar circleSplitSeekBar = (SeekBar)root.findViewById(R.id.splitCountSeekBar);
+        circleSplitSeekBar.setMax(Setting.CIRCLE_SPLIT_MAX);
+        circleSplitSeekBar.setProgress(setting.get2ndLayerSplit());
+        circleSplitSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if(progress < Setting.CIRCLE_SPLIT_MINI && fromUser){
+                    progress = Setting.CIRCLE_SPLIT_MINI;
+                }
+                setSplitText(progress);
+                setting.set2ndLayerSplit(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        setSplitText(setting.get2ndLayerSplit());
+
+    }
+
+    private void setSplitText(int count){
+        splitCountText.setText(getString(R.string.secondLayerSplitCount, count));
     }
 
 }

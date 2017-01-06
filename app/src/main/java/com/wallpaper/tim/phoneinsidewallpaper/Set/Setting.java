@@ -28,6 +28,10 @@ public class Setting {
 
     public static final int LINE_CHART_STROKE = 30;
 
+    public static final int CIRCLE_SPLIT_MAX = 180;
+    public static final int CIRCLE_SPLIT_MINI = 3;
+    private static final String KEY_2_LAYER_COUNT = "secondLayerCount";
+
     public Setting(Context context){
         sp = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
     }
@@ -98,6 +102,21 @@ public class Setting {
         }
 
         return color;
+    }
+
+    /*
+    *
+    * 2nd circle split count setting
+    * */
+    public void set2ndLayerSplit(int count){
+        if(count < 2){
+            return;
+        }
+        sp.edit().putInt(KEY_2_LAYER_COUNT, count).apply();
+    }
+
+    public int get2ndLayerSplit(){
+        return sp.getInt(KEY_2_LAYER_COUNT, CIRCLE_SPLIT_MINI);
     }
 
 

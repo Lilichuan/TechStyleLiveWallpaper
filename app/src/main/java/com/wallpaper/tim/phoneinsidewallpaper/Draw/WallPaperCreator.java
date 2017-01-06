@@ -20,7 +20,8 @@ public class WallPaperCreator {
     private static final String TAG = "WallPaperCreator";
     private Paint bigCirclePaint;
     private DrawSecondTool drawSecondTool;
-    private RectF smallCircleRectF;
+    private RectF smallCircleRectF, terminalRectF;
+    private TechEdge techEdge;
 
     public WallPaperCreator(Context context){
         Setting setting = new Setting(context);
@@ -35,6 +36,8 @@ public class WallPaperCreator {
         drawSecondTool = new DrawSecondTool(setting.get2ndLayerSplit()
                 ,Setting.getFadeColor(Colors.ORANGE)
                 ,Colors.ORANGE);
+
+        techEdge = new TechEdge(Colors.TERMINAL_GREEN);
     }
 
     public void draw(Canvas canvas){
@@ -42,12 +45,14 @@ public class WallPaperCreator {
         if(visible){
             canvas.drawColor(Color.parseColor("#000000"));
             drawCircles(canvas);
+
             drawTerminal(canvas);
+
+
             if(isShowingClickAnimation()){
                 boolean result = analysisEffect.draw(canvas, motionEvent.getX(), motionEvent.getY());
                 if(!result){
                     motionEvent = null;
-                    drawTerminal(canvas);
                 }
             }
             canvas.save();
@@ -74,7 +79,11 @@ public class WallPaperCreator {
 
     private void drawTerminal(Canvas canvas){
 
-        fakeTerminal.draw(canvas);
+        if(terminalRectF == null){
+            terminalRectF = new RectF(0,0,canvas.getWidth() / 3, canvas.getHeight());
+        }
+        techEdge.normalEdge(canvas, terminalRectF);
+        fakeTerminal.draw(canvas, terminalRectF);
     }
 
 

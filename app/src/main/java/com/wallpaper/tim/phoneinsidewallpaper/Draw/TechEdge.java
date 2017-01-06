@@ -10,7 +10,7 @@ public class TechEdge {
 
     private Paint paint;
     private RectF rectF;
-    private int stroke_w = 6;
+    public static final int stroke_w = 6;
 
     private Canvas m_canvas;
     private Bitmap bmp;
@@ -24,6 +24,11 @@ public class TechEdge {
     public void normalEdge(Canvas canvas){
         initNormalPaint();
         initRect(canvas.getWidth(), canvas.getHeight());
+        canvas.drawRect(rectF, paint);
+    }
+
+    public void normalEdge(Canvas canvas, RectF rectF){
+        initNormalPaint();
         canvas.drawRect(rectF, paint);
     }
 
@@ -162,7 +167,7 @@ public class TechEdge {
         }
     }
 
-    public void setStrokeWidth(int strokeWidth) {
-        stroke_w = strokeWidth;
+    public static int getStrokeWidth() {
+        return stroke_w;
     }
 }

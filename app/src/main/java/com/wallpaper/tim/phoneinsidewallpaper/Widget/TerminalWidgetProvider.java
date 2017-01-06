@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.RectF;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.widget.RemoteViews;
@@ -72,7 +73,8 @@ public class TerminalWidgetProvider extends AppWidgetProvider {
     private Bitmap drawTerminal(int w, int h){
         Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_4444);
         Canvas chartCanvas = new Canvas(bitmap);
-        fakeTerminal.draw(chartCanvas);
+        RectF rectF = new RectF(0, 0 , w, h);
+        fakeTerminal.draw(chartCanvas, rectF);
         return bitmap;
     }
 }

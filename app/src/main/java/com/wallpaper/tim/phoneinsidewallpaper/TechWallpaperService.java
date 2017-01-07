@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Handler;
 import android.service.wallpaper.WallpaperService;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
@@ -67,7 +68,7 @@ public class TechWallpaperService extends WallpaperService {
             super.onSurfaceChanged(holder, format, width, height);
             surfaceHolder = holder;
             Canvas canvas = holder.lockCanvas();
-            wallPaperCreator = null;//reset
+            getWallPaperCreator().clear();
             getWallPaperCreator().draw(canvas);
             holder.unlockCanvasAndPost(canvas);
         }
@@ -89,11 +90,11 @@ public class TechWallpaperService extends WallpaperService {
         @Override
         public void onVisibilityChanged(boolean visible) {
             super.onVisibilityChanged(visible);
-            getWallPaperCreator().setVisible(visible);
             if (visible) {
                 handler.post(runnable);
             } else {
                 handler.removeCallbacks(runnable);
+                wallPaperCreator.clear();
             }
         }
 
@@ -104,6 +105,10 @@ public class TechWallpaperService extends WallpaperService {
 
             return wallPaperCreator;
         }
+
+//        private void log(String s){
+//            Log.d(TAG,s);
+//        }
 
 
     }

@@ -24,7 +24,7 @@ public class Setting {
     public static final int TERMINAL_TEXT_SMALLEST = 10;
     public static final int TERMINAL_TEXT_BIGGEST = 60;
 
-    public static final int ANIMATION_TIME = 4000;
+    public static final int ANIMATION_TIME = 600;
 
     public static final int LINE_CHART_STROKE = 30;
 

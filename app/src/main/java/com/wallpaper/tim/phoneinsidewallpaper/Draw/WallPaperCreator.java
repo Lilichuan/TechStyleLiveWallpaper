@@ -42,22 +42,16 @@ public class WallPaperCreator {
 
     public void draw(Canvas canvas){
 
-        if(visible){
-            canvas.drawColor(Color.parseColor("#000000"));
-            drawCircles(canvas);
-
-            drawTerminal(canvas);
-
-
-            if(isShowingClickAnimation()){
-                boolean result = analysisEffect.draw(canvas, motionEvent.getX(), motionEvent.getY());
-                if(!result){
-                    motionEvent = null;
-                }
+        canvas.drawColor(Color.parseColor("#000000"));
+        drawCircles(canvas);
+        drawTerminal(canvas);
+        if(isShowingClickAnimation()){
+            boolean result = analysisEffect.draw(canvas, motionEvent.getX(), motionEvent.getY());
+            if(!result){
+                motionEvent = null;
             }
-            canvas.save();
         }
-
+        canvas.save();
     }
 
     private void drawCircles(Canvas canvas){
@@ -87,12 +81,12 @@ public class WallPaperCreator {
     }
 
 
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-        if(!visible){
-            clear();
-        }
-    }
+//    public void setVisible(boolean visible) {
+//        this.visible = visible;
+//        if(!visible){
+//            clear();
+//        }
+//    }
 
     public void clear(){
         analysisEffect.reset();

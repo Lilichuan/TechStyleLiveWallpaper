@@ -92,6 +92,8 @@ public class WallPaperCreator {
         analysisEffect.reset();
         motionEvent = null;
         smallCircleRectF = null;
+        terminalRectF = null;
+        fakeTerminal.reset();
     }
 
     public void cleanCanvas(Canvas canvas){

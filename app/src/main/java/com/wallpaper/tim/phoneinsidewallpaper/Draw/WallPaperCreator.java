@@ -16,16 +16,14 @@ public class WallPaperCreator {
     private FakeTerminal fakeTerminal;
     private AnalysisEffect analysisEffect;
     private MotionEvent motionEvent;
-    private boolean visible;
-    private static final String TAG = "WallPaperCreator";
+//    private static final String TAG = "WallPaperCreator";
     private Paint bigCirclePaint;
     private DrawSecondTool drawSecondTool;
-    private RectF smallCircleRectF, terminalRectF;
-    private TechEdge techEdge;
+    private RectF smallCircleRectF;
 
     public WallPaperCreator(Context context){
         Setting setting = new Setting(context);
-        fakeTerminal = new FakeTerminal(context, Colors.TERMINAL_GREEN, setting.getTerminalTextSize());
+        fakeTerminal = new FakeTerminal(context, Colors.BLUE, setting.getTerminalTextSize());
         analysisEffect = new AnalysisEffect(Colors.BLUE);
 
         bigCirclePaint = new Paint();
@@ -37,7 +35,6 @@ public class WallPaperCreator {
                 ,Setting.getFadeColor(Colors.ORANGE)
                 ,Colors.ORANGE);
 
-        techEdge = new TechEdge(Colors.TERMINAL_GREEN);
     }
 
     public void draw(Canvas canvas){
@@ -73,11 +70,12 @@ public class WallPaperCreator {
 
     private void drawTerminal(Canvas canvas){
 
-        if(terminalRectF == null){
-            terminalRectF = new RectF(0,0,canvas.getWidth() / 3, canvas.getHeight());
-        }
-        techEdge.normalEdge(canvas, terminalRectF);
-        fakeTerminal.draw(canvas, terminalRectF);
+//        if(terminalRectF == null){
+//            terminalRectF = new RectF(0,0,canvas.getWidth() / 3, canvas.getHeight());
+//        }
+//        techEdge.normalEdge(canvas, terminalRectF);
+//        fakeTerminal.draw(canvas, terminalRectF);
+        fakeTerminal.draw(canvas);
     }
 
 
@@ -92,7 +90,6 @@ public class WallPaperCreator {
         analysisEffect.reset();
         motionEvent = null;
         smallCircleRectF = null;
-        terminalRectF = null;
         fakeTerminal.reset();
     }
 
@@ -102,10 +99,11 @@ public class WallPaperCreator {
     }
 
     public void setMotionEvent(MotionEvent me){
-        if(me.getAction() == MotionEvent.ACTION_DOWN
-                && motionEvent == null){
-            motionEvent = me;
-        }
+        motionEvent = me;
+        analysisEffect.resetPosition();
+//        if(me.getAction() == MotionEvent.ACTION_DOWN){
+//
+//        }
     }
 
     public boolean isShowingClickAnimation(){

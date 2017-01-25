@@ -9,7 +9,7 @@ import com.wallpaper.tim.phoneinsidewallpaper.Set.Setting;
 
 public class AnalysisEffect {
 
-    private Paint paint;
+    private Paint paint, textPaint;
     private float singleRadianDegree;
     private float SEPARATE_DEGREE = 5;
     private float STROKE_W = 20;
@@ -27,6 +27,9 @@ public class AnalysisEffect {
     //每隔多久就刷新，單位是毫秒
     public static final int SINGLE_FRAME_TIME = 25;
 
+    //目前跑了幾格動畫，當作逐格動畫的順序標準
+    private int frameCount = 1;
+
     private RectF smallCircleRect ,bigCircleRect;
 
     private final int DIRECTION_LEFT_TOP = 1;
@@ -34,7 +37,13 @@ public class AnalysisEffect {
     private final int DIRECTION_RIGHT_TOP = 3;
     private final int DIRECTION_RIGHT_DOWN = 4;
 
-    private int direction_info_window = -1;
+    private int direction_info_window_A = -1;
+    private int direction_info_window_B = -1;
+
+    private TechEdge techEdge;
+
+    private SmallWindow smallWindow1;
+    private int SMALL_WINDOW_TEXT_SIZE = 13;
 
     public AnalysisEffect(String color){
         paint = new Paint();
@@ -43,8 +52,43 @@ public class AnalysisEffect {
         paint.setStrokeWidth(STROKE_W);
         paint.setStyle(Paint.Style.STROKE);
 
+        textPaint = new Paint(paint);
+        textPaint.setStyle(Paint.Style.FILL);
+        textPaint.setTextSize(SMALL_WINDOW_TEXT_SIZE);
+
         float count = 360 - (CIRCLE_SPLIT * SEPARATE_DEGREE);
         singleRadianDegree = count / CIRCLE_SPLIT;
+        techEdge = new TechEdge(color);
+
+    }
+
+    private void initSmallWindow(){
+
+        if(smallWindow1 != null){
+            return;
+        }
+
+        smallWindow1 = new SmallWindow() {
+            @Override
+            public void drawInRect(Canvas canvas, RectF self_edge) {
+                String[] array = {"001000100001111","10110011110111","1000111111100,010101010111"};
+                int start = frameCount % array.length;
+                int count = 0;
+                float textY = self_edge.top;
+                float textX = self_edge.left;
+
+                while (count <= array.length){
+                    canvas.drawText(array[start], textX, textY,textPaint);
+                    textY += SMALL_WINDOW_TEXT_SIZE + 3;
+                    start++;
+                    if(start > array.length){
+                        start = 0;
+                    }
+                    count++;
+                }
+
+            }
+        };
     }
 
     /*
@@ -63,13 +107,17 @@ public class AnalysisEffect {
 
         drawCircle(canvas, bigRect, bigCircleStartAngle, STROKE_W);
         drawCircle(canvas, smallRect, smallCircleStartAngle, STROKE_W / 2);
-
+        canvas.save();
+        initSmallWindow();
         calculate_small_window_direction(canvas, clickX, clickY);
+        smallWindow1.init(bigRect, direction_info_window_A);
+        smallWindow1.draw(canvas, techEdge);
 
         return after_a_frame();
     }
 
     private void calculate_small_window_direction(Canvas canvas, float clickX, float clickY){
+
         float toLeft, toRight, toTop, toBottom;
         toLeft = clickX;
         toRight = canvas.getWidth() - clickX;
@@ -80,10 +128,12 @@ public class AnalysisEffect {
         boolean left = toLeft >= toRight;
 
         if(top){
-            direction_info_window = left ? DIRECTION_LEFT_TOP : DIRECTION_RIGHT_TOP;
+            direction_info_window_A = left ? DIRECTION_LEFT_TOP : DIRECTION_RIGHT_TOP;
         }else {
-            direction_info_window = left ? DIRECTION_LEFT_DOWN : DIRECTION_RIGHT_DOWN;
+            direction_info_window_A = left ? DIRECTION_LEFT_DOWN : DIRECTION_RIGHT_DOWN;
         }
+
+
     }
 
     private void drawCircle(Canvas canvas, RectF rectF, int startDegree, float stroke_w){
@@ -99,6 +149,8 @@ public class AnalysisEffect {
     }
 
     private boolean after_a_frame(){
+        frameCount ++;
+
         time_passed += SINGLE_FRAME_TIME;
 
         bigCircleStartAngle += ROTATE_DEGREE_PER_FRAME;
@@ -144,10 +196,69 @@ public class AnalysisEffect {
     }
 
     public void reset(){
-        bigCircleRect = smallCircleRect = null;
+        resetPosition();
         time_passed = 0;
         bigCircleStartAngle = 0;
         smallCircleStartAngle = 360;
-        direction_info_window = -1;
+        direction_info_window_A = -1;
+        frameCount = 1;
+        smallWindow1 = null;
+    }
+
+    public void resetPosition(){
+        bigCircleRect = smallCircleRect = null;
+    }
+
+    private abstract class SmallWindow{
+
+        private RectF rectF;
+
+        public SmallWindow(){
+
+        }
+
+        public SmallWindow(RectF circleRect, int direction){
+            init(circleRect, direction);
+        }
+
+        public void init(RectF circleRect, int direction){
+            float w = (float) (circleRect.width() * 0.6);
+            float h = circleRect.height() / 7;
+            float startX, startY;
+            float margin = circleRect.width() / 9;
+
+            switch (direction){
+                case DIRECTION_LEFT_TOP:
+                    startX = circleRect.left - margin - w;
+                    startY = circleRect.top - margin - h;
+                    break;
+                case DIRECTION_LEFT_DOWN:
+                    startX = circleRect.left - margin - w;
+                    startY = circleRect.bottom + margin + h;
+                    break;
+                case DIRECTION_RIGHT_TOP:
+                    startX = circleRect.right + margin;
+                    startY = circleRect.top - margin - h;
+                    break;
+                case DIRECTION_RIGHT_DOWN:
+                    startX = circleRect.right + margin;
+                    startY = circleRect.bottom + margin;
+                    break;
+                default:
+                    startX = startY = 0;
+            }
+
+            rectF = new RectF(startX, startY, startX + w, startY + h);
+        }
+
+
+        public void draw(Canvas canvas, TechEdge techEdge){
+            techEdge.normalEdge(canvas, rectF);
+            canvas.clipRect(rectF);
+            drawInRect(canvas, rectF);
+            canvas.restore();
+        }
+
+        public abstract void drawInRect(Canvas canvas, RectF self_edge);
     }
 }

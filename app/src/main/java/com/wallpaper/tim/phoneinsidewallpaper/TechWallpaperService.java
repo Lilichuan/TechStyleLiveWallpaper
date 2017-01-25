@@ -4,16 +4,11 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Handler;
 import android.service.wallpaper.WallpaperService;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
 import com.wallpaper.tim.phoneinsidewallpaper.Draw.AnalysisEffect;
 import com.wallpaper.tim.phoneinsidewallpaper.Draw.WallPaperCreator;
-
-/**
- * Created by tim on 2016/11/10.
- */
 
 public class TechWallpaperService extends WallpaperService {
 
@@ -75,10 +70,13 @@ public class TechWallpaperService extends WallpaperService {
 
         @Override
         public void onTouchEvent(MotionEvent event) {
-            super.onTouchEvent(event);
             handler.removeCallbacks(runnable);
             wallPaperCreator.setMotionEvent(event);
             handler.postDelayed(runnable, AnalysisEffect.SINGLE_FRAME_TIME);
+
+//            if(event.getAction() == MotionEvent.ACTION_DOWN){}
+
+            super.onTouchEvent(event);
         }
 
         @Override

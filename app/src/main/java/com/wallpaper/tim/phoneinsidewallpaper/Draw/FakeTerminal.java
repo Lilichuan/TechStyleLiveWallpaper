@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.util.Log;
 
 import com.wallpaper.tim.phoneinsidewallpaper.R;
 
@@ -30,7 +29,7 @@ public class FakeTerminal {
         paint.setAntiAlias(false);
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTextSize(textSize);
-        texts = context.getResources().getStringArray(R.array.art_of_war);
+        texts = context.getResources().getStringArray(R.array.fake_terminal_str);
 
     }
 
@@ -66,8 +65,8 @@ public class FakeTerminal {
         for (int i = lines.size() - 1; i >= 0 ;i--){
             SingleLine line = lines.get(i);
             line.setPosition(
-                    (int)(SINGLE_LINE_MARGIN + rectF.left + TechEdge.getStrokeWidth()),
-                    (int)(rectF.bottom - (lineH_unit * b)));
+                    SINGLE_LINE_MARGIN + rectF.left + TechEdge.getStrokeWidth(),
+                    rectF.bottom - (lineH_unit * b));
             b++;
         }
     }
@@ -94,17 +93,10 @@ public class FakeTerminal {
         lastShowTextPosition = -1;
     }
 
-//    public void draw(Canvas canvas){
-//        if(lastShowTextPosition < 0){
-//            initLines(canvas.getHeight());
-//        }else {
-//            initForNewLine();
-//        }
-//
-//        for (SingleLine line : lines){
-//            canvas.drawText(line.getStr(), line.getX(), line.getY(), paint);
-//        }
-//    }
+    public void draw(Canvas canvas){
+        RectF rectF = new RectF(0, 0, canvas.getWidth(), canvas.getHeight());
+        draw(canvas, rectF);
+    }
 
     public void draw(Canvas canvas, RectF rectF){
         if(lastShowTextPosition < 0){
@@ -114,12 +106,7 @@ public class FakeTerminal {
         }
 
         for (SingleLine line : lines){
-            canvas.drawText(line.getStr(),
-                    0,
-                    line.getTextDisplayPosition(paint, rectF.width()),
-                    line.getX(),
-                    line.getY(),
-                    paint);
+            line.draw(canvas, paint);
         }
     }
 
@@ -129,16 +116,13 @@ public class FakeTerminal {
 
         //此值被動畫使用
         //已經播放到第幾個字
-        private int displayPosition = 0;
-
-        //該行有多少字元長度
-        private int textLength;
+//        private int displayPosition = 0;
 
         //繪製座標
-        private int p_x, p_y;
+        private float p_x, p_y;
 
         //可見字元
-        private int max_display_position;
+        //private int max_display_position;
 
         SingleLine(){
 
@@ -150,37 +134,23 @@ public class FakeTerminal {
 
         void setStr(String str) {
             this.str = str;
-            textLength = str.length();
         }
 
-        void setPosition(int x, int y){
+        void setPosition(float x, float y){
             p_x = x;
             p_y = y;
         }
 
-        public int getX() {
+        public float getX() {
             return p_x;
         }
 
-        public int getY() {
+        public float getY() {
             return p_y;
         }
 
-        public int getTextDisplayPosition(Paint paint, float areaW){
-            float textW = paint.measureText(str);
-            if(textW <= areaW){
-                return textLength;
-            }else {
-                float fixW;
-                for (int i = 0;i < textLength ;i++){
-                    fixW = paint.measureText(str, 0, i);
-                    if(fixW >= areaW){
-                        return i - 1;
-                    }
-                }
-                return textLength;
-            }
-
+        public void draw(Canvas canvas, Paint paint){
+            canvas.drawText(str, p_x, p_y, paint);
         }
     }
 

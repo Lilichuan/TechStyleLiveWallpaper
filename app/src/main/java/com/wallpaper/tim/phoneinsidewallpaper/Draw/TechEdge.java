@@ -170,4 +170,8 @@ public class TechEdge {
     public static int getStrokeWidth() {
         return stroke_w;
     }
+
+    public Paint getPaint(){
+        return paint;
+    }
 }

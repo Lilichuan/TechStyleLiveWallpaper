@@ -37,9 +37,6 @@ public class AnalysisEffect {
     private final int DIRECTION_RIGHT_TOP = 3;
     private final int DIRECTION_RIGHT_DOWN = 4;
 
-    private int direction_info_window_A = -1;
-    private int direction_info_window_B = -1;
-
     private TechEdge techEdge;
 
     private SmallWindow smallWindow1;
@@ -71,17 +68,18 @@ public class AnalysisEffect {
         smallWindow1 = new SmallWindow() {
             @Override
             public void drawInRect(Canvas canvas, RectF self_edge) {
-                String[] array = {"001000100001111","10110011110111","1000111111100,010101010111"};
+                String[] array = {"001000100001111","10110011110111","1000111111100","010101010111"};
                 int start = frameCount % array.length;
+
                 int count = 0;
                 float textY = self_edge.top;
                 float textX = self_edge.left;
 
-                while (count <= array.length){
+                while (count < array.length){
                     canvas.drawText(array[start], textX, textY,textPaint);
                     textY += SMALL_WINDOW_TEXT_SIZE + 3;
                     start++;
-                    if(start > array.length){
+                    if(start >= array.length){
                         start = 0;
                     }
                     count++;
@@ -108,33 +106,15 @@ public class AnalysisEffect {
         drawCircle(canvas, bigRect, bigCircleStartAngle, STROKE_W);
         drawCircle(canvas, smallRect, smallCircleStartAngle, STROKE_W / 2);
         canvas.save();
+
         initSmallWindow();
-        calculate_small_window_direction(canvas, clickX, clickY);
-        smallWindow1.init(bigRect, direction_info_window_A);
+        smallWindow1.init(canvas, clickX, clickY, bigRect);
         smallWindow1.draw(canvas, techEdge);
 
         return after_a_frame();
     }
 
-    private void calculate_small_window_direction(Canvas canvas, float clickX, float clickY){
 
-        float toLeft, toRight, toTop, toBottom;
-        toLeft = clickX;
-        toRight = canvas.getWidth() - clickX;
-        toTop = clickY;
-        toBottom = canvas.getHeight() - clickY;
-
-        boolean top = toTop >= toBottom;
-        boolean left = toLeft >= toRight;
-
-        if(top){
-            direction_info_window_A = left ? DIRECTION_LEFT_TOP : DIRECTION_RIGHT_TOP;
-        }else {
-            direction_info_window_A = left ? DIRECTION_LEFT_DOWN : DIRECTION_RIGHT_DOWN;
-        }
-
-
-    }
 
     private void drawCircle(Canvas canvas, RectF rectF, int startDegree, float stroke_w){
         int temp_start = startDegree;
@@ -200,7 +180,6 @@ public class AnalysisEffect {
         time_passed = 0;
         bigCircleStartAngle = 0;
         smallCircleStartAngle = 360;
-        direction_info_window_A = -1;
         frameCount = 1;
         smallWindow1 = null;
     }
@@ -212,37 +191,66 @@ public class AnalysisEffect {
     private abstract class SmallWindow{
 
         private RectF rectF;
+        private float[] lineArray = new float[8];
+        private int direction_info;
+
 
         public SmallWindow(){
 
         }
 
-        public SmallWindow(RectF circleRect, int direction){
-            init(circleRect, direction);
-        }
-
-        public void init(RectF circleRect, int direction){
+        public void init(Canvas canvas, float clickX, float clickY, RectF circleRect){
             float w = (float) (circleRect.width() * 0.6);
             float h = circleRect.height() / 7;
             float startX, startY;
             float margin = circleRect.width() / 9;
 
-            switch (direction){
+            float q_w = w / 4;
+
+            calculate_small_window_direction(canvas, clickX, clickY);
+
+            switch (direction_info){
                 case DIRECTION_LEFT_TOP:
                     startX = circleRect.left - margin - w;
                     startY = circleRect.top - margin - h;
+                    lineArray[0] = circleRect.left + q_w;
+                    lineArray[1] = circleRect.top;
+                    lineArray[3] = lineArray[5] = lineArray[7] = startY + (h / 2);
+                    lineArray[2] = lineArray[0] - (lineArray[1] - lineArray[3]);
+                    lineArray[4] = lineArray[2];
+                    lineArray[6] = startX + w;
+
                     break;
                 case DIRECTION_LEFT_DOWN:
-                    startX = circleRect.left - margin - w;
+                    startX = circleRect.left - (margin*4) - w;
                     startY = circleRect.bottom + margin + h;
+                    lineArray[0] = circleRect.left + q_w;
+                    lineArray[1] = circleRect.bottom;
+                    lineArray[3] = lineArray[5] = lineArray[7] = startY + (h / 2);
+                    lineArray[2] = lineArray[0] - (lineArray[3] - lineArray[1]);
+                    lineArray[4] = lineArray[2];
+                    lineArray[6] = startX + w;
+
                     break;
                 case DIRECTION_RIGHT_TOP:
                     startX = circleRect.right + margin;
                     startY = circleRect.top - margin - h;
+                    lineArray[0] = circleRect.right - q_w;
+                    lineArray[1] = circleRect.top;
+                    lineArray[3] = lineArray[5] = lineArray[7] = startY + (h / 2);
+                    lineArray[2] = lineArray[0] + (lineArray[1] - lineArray[3]);
+                    lineArray[4] = lineArray[2];
+                    lineArray[6] = startX;
                     break;
                 case DIRECTION_RIGHT_DOWN:
                     startX = circleRect.right + margin;
                     startY = circleRect.bottom + margin;
+                    lineArray[0] = circleRect.right - q_w;
+                    lineArray[1] = circleRect.bottom;
+                    lineArray[3] = lineArray[5] = lineArray[7] = startY + (h / 2);
+                    lineArray[2] = lineArray[0] + (lineArray[3] - lineArray[1]);
+                    lineArray[4] = lineArray[2];
+                    lineArray[6] = startX;
                     break;
                 default:
                     startX = startY = 0;
@@ -254,11 +262,30 @@ public class AnalysisEffect {
 
         public void draw(Canvas canvas, TechEdge techEdge){
             techEdge.normalEdge(canvas, rectF);
+            canvas.drawLines(lineArray, techEdge.getPaint());
             canvas.clipRect(rectF);
             drawInRect(canvas, rectF);
             canvas.restore();
         }
 
         public abstract void drawInRect(Canvas canvas, RectF self_edge);
+
+        private void calculate_small_window_direction(Canvas canvas, float clickX, float clickY){
+
+            float toLeft, toRight, toTop, toBottom;
+            toLeft = clickX;
+            toRight = canvas.getWidth() - clickX;
+            toTop = clickY;
+            toBottom = canvas.getHeight() - clickY;
+
+            boolean top = toTop >= toBottom;
+            boolean left = toLeft >= toRight;
+
+            if(top){
+                direction_info = left ? DIRECTION_LEFT_TOP : DIRECTION_RIGHT_TOP;
+            }else {
+                direction_info = left ? DIRECTION_LEFT_DOWN : DIRECTION_RIGHT_DOWN;
+            }
+        }
     }
 }

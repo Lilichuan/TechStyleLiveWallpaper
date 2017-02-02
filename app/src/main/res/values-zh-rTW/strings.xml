@@ -7,29 +7,19 @@
     <string name="display_2nd_layer">顯示第二層圓圈</string>
     <string name="setting">設定</string>
     <string name="secondLayerSplitCount">第二圈分裂數量:%d</string>
-    <string name="main_theme_color">主題顏色</string>
+    <string name="circle_color">圓圈顏色</string>
 
-    <string-array name="colors">
-        <item>綠色</item>
-        <item>紫色</item>
-        <item>橘色</item>
-        <item>藍色</item>
-        <item>紅色</item>
-        <item>恐龍巴尼博士色</item>
-        <item>黃色</item>
-    </string-array>
+    <string name="color_green">綠色</string>
+    <string name="color_purple">紫色</string>
+    <string name="color_orange">橘色</string>
+    <string name="color_blue">藍色</string>
+    <string name="color_rad">紅色</string>
+    <string name="color_yellow">黃色</string>
 
     <string name="wallpaper_author">Lilichuan</string>
     <string name="wallpaper_description">科技風格背景</string>
     <string name="app_name">科技風背景</string>
 
-    <string-array name="error_code">
-        <item>Error:Romeo</item>
-        <item>Error:Delta</item>
-        <item>Error:MIKE</item>
-        <item>Error:Aiden Pearce hacked</item>
-        <item>Error:Bishop hacked</item>
-    </string-array>
     <string name="displayMainShadow">顯示主圈陰影</string>
     <string name="showBattery">在主環上呈現裝置剩餘電力</string>
 

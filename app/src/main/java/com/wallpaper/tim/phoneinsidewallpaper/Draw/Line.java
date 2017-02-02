@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import com.wallpaper.tim.phoneinsidewallpaper.Set.Colors;
 import com.wallpaper.tim.phoneinsidewallpaper.Set.Setting;
 
 /**
@@ -26,7 +27,7 @@ public class Line {
     public void initPaint(){
         paint = new Paint();
         paint.setAntiAlias(true);
-        paint.setColor(Color.parseColor(setting.getThemeColor()));
+        paint.setColor(Color.parseColor(Colors.BLUE));
         paint.setStrokeWidth(strokeW);
         paint.setStyle(Paint.Style.STROKE);
     }

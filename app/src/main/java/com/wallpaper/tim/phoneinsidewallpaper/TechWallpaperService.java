@@ -46,7 +46,7 @@ public class TechWallpaperService extends WallpaperService {
         private void draw(){
             if(surfaceHolder != null && isVisible()){
                 Canvas canvas = surfaceHolder.lockCanvas();
-                wallPaperCreator.draw(canvas);
+                wallPaperCreator.draw(getBaseContext(), canvas);
                 surfaceHolder.unlockCanvasAndPost(canvas);
             }
 
@@ -64,7 +64,7 @@ public class TechWallpaperService extends WallpaperService {
             surfaceHolder = holder;
             Canvas canvas = holder.lockCanvas();
             getWallPaperCreator().clear();
-            getWallPaperCreator().draw(canvas);
+            getWallPaperCreator().draw(getBaseContext(), canvas);
             holder.unlockCanvasAndPost(canvas);
         }
 

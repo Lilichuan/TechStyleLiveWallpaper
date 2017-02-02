@@ -11,19 +11,14 @@
     <string name="secondLayerSplitCount">Second circle display count:%d</string>
     <string name="setting">Setting</string>
 
-    <string name="main_theme_color">Main theme color</string>
+    <string name="circle_color">Circle color</string>
 
-
-
-    <string-array name="colors">
-        <item>Green</item>
-        <item>Purple</item>
-        <item>Orange</item>
-        <item>Blue</item>
-        <item>Rad</item>
-        <item>Barney color</item>
-        <item>Yellow</item>
-    </string-array>
+    <string name="color_green">Green</string>
+    <string name="color_purple">Purple</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_blue">Blue</string>
+    <string name="color_rad">Rad</string>
+    <string name="color_yellow">Yellow</string>
 
     <string name="wallpaper_author">Lilichuan</string>
     <string name="wallpaper_description">Tech style clock</string>

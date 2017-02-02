@@ -13,6 +13,7 @@ import android.widget.RemoteViews;
 import com.wallpaper.tim.phoneinsidewallpaper.Draw.FakeTerminal;
 import com.wallpaper.tim.phoneinsidewallpaper.Draw.TechEdge;
 import com.wallpaper.tim.phoneinsidewallpaper.R;
+import com.wallpaper.tim.phoneinsidewallpaper.Set.Colors;
 import com.wallpaper.tim.phoneinsidewallpaper.Set.Setting;
 
 /**
@@ -61,8 +62,8 @@ public class TerminalWidgetProvider extends AppWidgetProvider {
         int w = w_dp * TypedValue.COMPLEX_UNIT_DIP;
         int h = h_dp * TypedValue.COMPLEX_UNIT_DIP;
 
-        Setting setting = new Setting(context);
-        TechEdge techEdge = new TechEdge(setting.getThemeColor());
+//        Setting setting = new Setting(context);
+        TechEdge techEdge = new TechEdge(Colors.BLUE);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.terminal_layout);
         views.setImageViewBitmap(R.id.window_edge, techEdge.techEdge(w, h));
         views.setImageViewBitmap(R.id.terminal, drawTerminal(w, h));

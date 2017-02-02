@@ -14,6 +14,7 @@ import android.widget.RemoteViews;
 import com.wallpaper.tim.phoneinsidewallpaper.Draw.BatteryTool;
 import com.wallpaper.tim.phoneinsidewallpaper.Draw.TechEdge;
 import com.wallpaper.tim.phoneinsidewallpaper.R;
+import com.wallpaper.tim.phoneinsidewallpaper.Set.Colors;
 import com.wallpaper.tim.phoneinsidewallpaper.Set.Setting;
 
 
@@ -53,13 +54,13 @@ public class BatteryWidgetProvider extends AppWidgetProvider {
         }
 
         if(techEdge == null){
-            techEdge = new TechEdge(setting.getThemeColor());
+            techEdge = new TechEdge(Colors.BLUE);
         }
 
         float select = batteryTool.getBatteryAgain();
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
-        views.setTextColor(R.id.text, Color.parseColor(setting.getThemeColor()));
+        views.setTextColor(R.id.text, Color.parseColor(Colors.BLUE));
         views.setImageViewBitmap(R.id.window_edge, techEdge.techEdge(w, h));
         views.setImageViewBitmap(R.id.line_chart, drawChart(w, Setting.LINE_CHART_STROKE, select));
         appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -73,7 +74,7 @@ public class BatteryWidgetProvider extends AppWidgetProvider {
         Canvas chartCanvas = new Canvas(bitmap);
 
         Paint paint = new Paint();
-        paint.setColor(Color.parseColor(setting.getThemeColor()));
+        paint.setColor(Color.parseColor(Colors.BLUE));
         paint.setStrokeWidth(h);
 
         w -= margin*2;

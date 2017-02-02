@@ -36,7 +36,7 @@ public class Setting {
         sp = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
     }
 
-    public void setThemeColor(String color){
+    public void setCircleColor(String color){
         if(TextUtils.isEmpty(color)){
             return;
         }
@@ -44,12 +44,12 @@ public class Setting {
         sp.edit().putString(KEY_THEME_COLOR, color).apply();
     }
 
-    public String getThemeColor(){
+    public String getCircleColor(){
         return sp.getString(KEY_THEME_COLOR, Colors.BLUE);
     }
 
     public String getFadeColor(){
-        return getFadeColor(getThemeColor());
+        return getFadeColor(getCircleColor());
     }
 
     public void setTerminalTextColor(String color){

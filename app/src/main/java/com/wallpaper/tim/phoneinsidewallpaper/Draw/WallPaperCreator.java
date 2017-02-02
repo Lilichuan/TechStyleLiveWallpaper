@@ -22,23 +22,39 @@ public class WallPaperCreator {
     private RectF smallCircleRectF;
 
     public WallPaperCreator(Context context){
+        init(context);
+    }
+
+    public void init(Context context){
+
         Setting setting = new Setting(context);
-        fakeTerminal = new FakeTerminal(context, Colors.BLUE, setting.getTerminalTextSize());
-        analysisEffect = new AnalysisEffect(Colors.BLUE);
+        if(fakeTerminal == null){
+            fakeTerminal = new FakeTerminal(context, Colors.BLUE, setting.getTerminalTextSize());
+        }
 
-        bigCirclePaint = new Paint();
-        bigCirclePaint.setAntiAlias(true);
-        bigCirclePaint.setColor(Color.parseColor(Colors.ORANGE));
-        bigCirclePaint.setStyle(Paint.Style.STROKE);
+        if(analysisEffect == null){
+            analysisEffect = new AnalysisEffect(Colors.BLUE);
+        }
 
-        drawSecondTool = new DrawSecondTool(setting.get2ndLayerSplit()
-                ,Setting.getFadeColor(Colors.ORANGE)
-                ,Colors.ORANGE);
+        if(bigCirclePaint == null){
+            bigCirclePaint = new Paint();
+            bigCirclePaint.setAntiAlias(true);
+            bigCirclePaint.setColor(Color.parseColor(setting.getCircleColor()));
+            bigCirclePaint.setStyle(Paint.Style.STROKE);
+        }
+
+
+        if(drawSecondTool == null){
+            drawSecondTool = new DrawSecondTool(setting.get2ndLayerSplit()
+                    ,setting.getCircleColor()
+                    ,setting.getFadeColor());
+        }
+
 
     }
 
-    public void draw(Canvas canvas){
-
+    public void draw(Context context, Canvas canvas){
+        init(context);
         canvas.drawColor(Color.parseColor("#000000"));
         drawCircles(canvas);
         drawTerminal(canvas);
@@ -88,9 +104,11 @@ public class WallPaperCreator {
 
     public void clear(){
         analysisEffect.reset();
+        bigCirclePaint = null;
         motionEvent = null;
         smallCircleRectF = null;
-        fakeTerminal.reset();
+        drawSecondTool = null;
+        fakeTerminal = null;
     }
 
     public void cleanCanvas(Canvas canvas){

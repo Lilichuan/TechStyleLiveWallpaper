@@ -46,6 +46,15 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"/>
 
+    <TextView
+        style="@style/set_title_text"
+        android:text="@string/circle_color"/>
+
+    <Spinner
+        android:id="@+id/circle_color_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"/>
 
     <Button
         android:id="@+id/back"

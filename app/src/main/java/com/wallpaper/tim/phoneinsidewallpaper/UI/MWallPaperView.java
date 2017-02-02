@@ -60,7 +60,7 @@ public class MWallPaperView extends View {
             if(pause){
                 wallPaperCreator.cleanCanvas(canvas);
             }else {
-                wallPaperCreator.draw(canvas);
+                wallPaperCreator.draw(getContext(), canvas);
             }
         }
     }

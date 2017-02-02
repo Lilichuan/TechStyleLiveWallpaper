@@ -41,7 +41,7 @@ public class CircleWidgetProvider extends AppWidgetProvider {
 
         Setting setting = new Setting(context);
 
-        widgetTool = new WidgetTool(context, setting.getThemeColor() , h, 7);
+        widgetTool = new WidgetTool(context, Colors.BLUE , h, 7);
 
         Calendar calendar = Calendar.getInstance(Locale.TAIWAN);
 
@@ -77,7 +77,7 @@ public class CircleWidgetProvider extends AppWidgetProvider {
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout_2);
         views.setTextViewText(R.id.text, text);
-        views.setTextColor(R.id.text, Color.parseColor(setting.getThemeColor()));
+        views.setTextColor(R.id.text, Color.parseColor(Colors.BLUE));
         views.setImageViewBitmap(R.id.circle, widgetTool.draw(adjustDayOfWeek, (float) adjustDayOfWeek / 7f));
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }

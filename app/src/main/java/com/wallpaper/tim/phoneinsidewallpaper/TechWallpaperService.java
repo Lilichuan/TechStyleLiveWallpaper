@@ -23,6 +23,12 @@ public class TechWallpaperService extends WallpaperService {
 
         private static final String TAG = "TechWallpaperService";
 
+        /*
+        *
+        * Use Handler and Runnable to draw animation
+        * 利用 Handler 和 Runnable定時繪製動畫
+        *
+        * */
         private Handler handler = new Handler();
         private Runnable runnable = new Runnable() {
             @Override
@@ -31,7 +37,14 @@ public class TechWallpaperService extends WallpaperService {
             }
         };
 
+        /*
+        *
+        * 所有繪製有關的物件與計算
+        * 都被包裝在 WallPaperCreator 裡面
+        *
+        * */
         private WallPaperCreator wallPaperCreator;
+
         private SurfaceHolder surfaceHolder;
 
         TechEngine(Context context){
@@ -74,8 +87,6 @@ public class TechWallpaperService extends WallpaperService {
             wallPaperCreator.setMotionEvent(event);
             handler.postDelayed(runnable, AnalysisEffect.SINGLE_FRAME_TIME);
 
-//            if(event.getAction() == MotionEvent.ACTION_DOWN){}
-
             super.onTouchEvent(event);
         }
 
@@ -104,6 +115,8 @@ public class TechWallpaperService extends WallpaperService {
             return wallPaperCreator;
         }
 
+        //測試用
+        //For test
 //        private void log(String s){
 //            Log.d(TAG,s);
 //        }

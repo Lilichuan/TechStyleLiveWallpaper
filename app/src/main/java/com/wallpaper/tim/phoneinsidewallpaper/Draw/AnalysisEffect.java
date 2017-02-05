@@ -7,11 +7,20 @@ import android.graphics.RectF;
 
 import com.wallpaper.tim.phoneinsidewallpaper.Set.Setting;
 
+/*
+* 負責繪製分析效果動畫
+* This class is use to draw Analysis animation
+*
+* */
 public class AnalysisEffect {
 
     private Paint paint, textPaint;
     private float singleRadianDegree;
+
+    //每段弧形之間要間隔多少度
     private float SEPARATE_DEGREE = 5;
+
+    //Paint的粗細
     private float STROKE_W = 20;
 
     private int time_passed = 0;
@@ -32,14 +41,19 @@ public class AnalysisEffect {
 
     private RectF smallCircleRect ,bigCircleRect;
 
+    //小裝飾動畫要在動畫主體的那一方繪製？
     private final int DIRECTION_LEFT_TOP = 1;
     private final int DIRECTION_LEFT_DOWN = 2;
     private final int DIRECTION_RIGHT_TOP = 3;
     private final int DIRECTION_RIGHT_DOWN = 4;
 
+    //負責繪製方框的物件
     private TechEdge techEdge;
 
+    //其中一個裝飾小動畫
     private SmallWindow smallWindow1;
+
+    //裝飾小動畫的文字大小
     private int SMALL_WINDOW_TEXT_SIZE = 13;
 
     public AnalysisEffect(String color){
@@ -59,6 +73,7 @@ public class AnalysisEffect {
 
     }
 
+    //初始「裝飾小動畫」的管理物件
     private void initSmallWindow(){
 
         if(smallWindow1 != null){
@@ -66,10 +81,21 @@ public class AnalysisEffect {
         }
 
         smallWindow1 = new SmallWindow() {
+
             @Override
-            public void drawInRect(Canvas canvas, RectF self_edge) {
+            public float createHeight(float mainHeight) {
+                return mainHeight / 7;
+            }
+
+            @Override
+            public float createWidth(float mainWidth) {
+                return (float) (mainWidth * 0.6);
+            }
+
+            @Override
+            public void drawInRect(Canvas canvas, RectF self_edge, int frame) {
                 String[] array = {"001000100001111","10110011110111","1000111111100","010101010111"};
-                int start = frameCount % array.length;
+                int start = frame % array.length;
 
                 int count = 0;
                 float textY = self_edge.top;
@@ -77,6 +103,8 @@ public class AnalysisEffect {
 
                 while (count < array.length){
                     canvas.drawText(array[start], textX, textY,textPaint);
+
+                    //下個Y位置＝原位置＋高＋間隔
                     textY += SMALL_WINDOW_TEXT_SIZE + 3;
                     start++;
                     if(start >= array.length){
@@ -91,6 +119,7 @@ public class AnalysisEffect {
 
     /*
     *
+    * 被外部調用的繪製
     * return: Need to display continue.
     * 回傳值：是否繼續呈現動畫
     * */
@@ -128,6 +157,12 @@ public class AnalysisEffect {
         }
     }
 
+    /*
+    *
+    * 結束一格動畫後的計算
+    * 回傳值：特效是否結束
+    *
+    * */
     private boolean after_a_frame(){
         frameCount ++;
 
@@ -151,6 +186,7 @@ public class AnalysisEffect {
         return need_continue;
     }
 
+    //取得繪製內圈的範圍
     private RectF getSmallCircleRect(float bigDiameter, float clickX, float clickY){
         if(smallCircleRect != null){
             return smallCircleRect;
@@ -161,6 +197,7 @@ public class AnalysisEffect {
         }
     }
 
+    //取得繪製外圈的範圍
     private RectF getBigCircleRect(float bigDiameter, float clickX, float clickY){
         if(bigCircleRect != null){
             return bigCircleRect;
@@ -170,6 +207,7 @@ public class AnalysisEffect {
         }
     }
 
+    //以clickX, clickY作為圓心，diameter為半徑長度，取得一個圓的範圍
     private RectF createCircleRect(float diameter, float clickX, float clickY){
         float radius = diameter / 2;
         return new RectF(clickX - radius ,clickY - radius ,clickX + radius , clickY + radius);
@@ -200,8 +238,8 @@ public class AnalysisEffect {
         }
 
         public void init(Canvas canvas, float clickX, float clickY, RectF circleRect){
-            float w = (float) (circleRect.width() * 0.6);
-            float h = circleRect.height() / 7;
+            float w = createWidth(circleRect.width());
+            float h = createHeight(circleRect.height());
             float startX, startY;
             float margin = circleRect.width() / 9;
 
@@ -264,11 +302,21 @@ public class AnalysisEffect {
             techEdge.normalEdge(canvas, rectF);
             canvas.drawLines(lineArray, techEdge.getPaint());
             canvas.clipRect(rectF);
-            drawInRect(canvas, rectF);
+            drawInRect(canvas, rectF, frameCount);
             canvas.restore();
         }
 
-        public abstract void drawInRect(Canvas canvas, RectF self_edge);
+
+        /*
+        *
+        * 裝飾動畫的小視窗的繪製效果、寬高都要自己定義。
+        *
+        * */
+        public abstract void drawInRect(Canvas canvas, RectF self_edge, int frameCount);
+
+        public abstract float createHeight(float mainHeight);
+
+        public abstract float createWidth(float mainWidth);
 
         private void calculate_small_window_direction(Canvas canvas, float clickX, float clickY){
 

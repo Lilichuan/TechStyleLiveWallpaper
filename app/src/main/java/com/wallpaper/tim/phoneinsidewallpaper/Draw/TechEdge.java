@@ -51,6 +51,7 @@ public class TechEdge {
         return bmp;
     }
 
+    //繪製科技感邊框所需的陣列
     private float[] createArray(int w, int h){
         float x = 0, y = 0, depth = w / 30;
         float flat = h / 8, flat2 = w / 3;

@@ -30,9 +30,7 @@ public class WorkWidgetProvider extends AppWidgetProvider {
 
     private void reDraw(Context context, AppWidgetManager appWidgetManager, int appWidgetId){
 
-        Bundle bundle = appWidgetManager.getAppWidgetOptions(appWidgetId);
-        int h = bundle.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT);
-
+        int h =(int) context.getResources().getDimension(R.dimen.widget_max_h);
         WidgetTool widgetTool = new WidgetTool(context, Colors.GREEN, h);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
 

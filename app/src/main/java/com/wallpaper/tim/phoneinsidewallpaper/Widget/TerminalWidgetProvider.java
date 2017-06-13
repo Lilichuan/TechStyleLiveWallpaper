@@ -56,17 +56,14 @@ public class TerminalWidgetProvider extends AppWidgetProvider {
     private void reDraw(Context context, AppWidgetManager appWidgetManager, int appWidgetId){
         init(context);
 
-        Bundle bundle = appWidgetManager.getAppWidgetOptions(appWidgetId);
-        int h_dp = bundle.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT);
-        int w_dp = bundle.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH);
-        int w = w_dp * TypedValue.COMPLEX_UNIT_DIP;
+        int h_dp = (int) context.getResources().getDimension(R.dimen.widget_max_h);
         int h = h_dp * TypedValue.COMPLEX_UNIT_DIP;
 
 //        Setting setting = new Setting(context);
         TechEdge techEdge = new TechEdge(Colors.BLUE);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.terminal_layout);
-        views.setImageViewBitmap(R.id.window_edge, techEdge.techEdge(w, h));
-        views.setImageViewBitmap(R.id.terminal, drawTerminal(w, h));
+        views.setImageViewBitmap(R.id.window_edge, techEdge.techEdge(h, h));
+        views.setImageViewBitmap(R.id.terminal, drawTerminal(h, h));
 
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }

@@ -85,16 +85,13 @@ public class WidgetTool {
 
 
     private void drawSplitCanvas(int select){
-
         for (int i = 0 ; i < SPLIT ;i++){
-
-            if(i < select){
-                canvas.drawArc(splitRectF, totalUnitDegree*i - 90, unitDegree, false, selectPaint );
-            }else {
-                canvas.drawArc(splitRectF, totalUnitDegree*i - 90, unitDegree, false, paint );
-            }
+            canvas.drawArc(splitRectF,//弧形範圍長寬與位置座標
+                    totalUnitDegree*i - 90,//該餅皮起始角度，90是誤差調整
+                    unitDegree,//餅皮結束角度
+                    false,//空心圓形
+                    i < select ? selectPaint : paint);//繪製顏色
         }
-
     }
 
 

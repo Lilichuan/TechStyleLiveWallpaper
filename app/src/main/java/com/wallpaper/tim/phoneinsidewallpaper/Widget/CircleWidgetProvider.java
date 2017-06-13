@@ -36,10 +36,7 @@ public class CircleWidgetProvider extends AppWidgetProvider {
 
     private void reDraw(Context context, AppWidgetManager appWidgetManager, int appWidgetId){
 
-        Bundle bundle = appWidgetManager.getAppWidgetOptions(appWidgetId);
-        int h = bundle.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT);
-
-        Setting setting = new Setting(context);
+        int h =(int) context.getResources().getDimension(R.dimen.widget_h);
 
         widgetTool = new WidgetTool(context, Colors.BLUE , h, 7);
 

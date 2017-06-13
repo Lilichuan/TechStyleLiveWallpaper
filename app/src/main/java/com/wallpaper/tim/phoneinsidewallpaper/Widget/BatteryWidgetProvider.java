@@ -38,12 +38,11 @@ public class BatteryWidgetProvider extends AppWidgetProvider {
     }
 
     private void reDraw(Context context, AppWidgetManager appWidgetManager, int appWidgetId){
+        //int h_dp = 40;
+        int w_dp = (int) context.getResources().getDimension(R.dimen.widget_max_h);
 
-        Bundle bundle = appWidgetManager.getAppWidgetOptions(appWidgetId);
-        int h_dp = bundle.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT);
-        int w_dp = bundle.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH);
         int w = w_dp * TypedValue.COMPLEX_UNIT_DIP;
-        int h = h_dp * TypedValue.COMPLEX_UNIT_DIP;
+        //int h = h_dp * TypedValue.COMPLEX_UNIT_DIP;
 
         if(batteryTool == null){
             batteryTool = new BatteryTool(context);
@@ -61,7 +60,7 @@ public class BatteryWidgetProvider extends AppWidgetProvider {
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
         views.setTextColor(R.id.text, Color.parseColor(Colors.BLUE));
-        views.setImageViewBitmap(R.id.window_edge, techEdge.techEdge(w, h));
+        views.setImageViewBitmap(R.id.window_edge, techEdge.techEdge(w*2, w));
         views.setImageViewBitmap(R.id.line_chart, drawChart(w, Setting.LINE_CHART_STROKE, select));
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }

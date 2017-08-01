@@ -15,7 +15,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-//WeekDay
+/**
+ * 呈現星期幾的圓圈桌面小工具
+ */
 public class CircleWidgetProvider extends AppWidgetProvider {
 
     private WidgetTool widgetTool;
@@ -40,10 +42,11 @@ public class CircleWidgetProvider extends AppWidgetProvider {
 
         widgetTool = new WidgetTool(context, Colors.BLUE , h, 7);
 
-        Calendar calendar = Calendar.getInstance(Locale.TAIWAN);
+        Locale locale = Locale.getDefault();
+        Calendar calendar = Calendar.getInstance(locale);
 
-        SimpleDateFormat format = new SimpleDateFormat("EEE", Locale.getDefault());
-        String text = format.format(Calendar.getInstance().getTime());
+        SimpleDateFormat format = new SimpleDateFormat("EEE", locale);
+        String text = format.format(calendar.getTime());
 
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
         int adjustDayOfWeek = 0;

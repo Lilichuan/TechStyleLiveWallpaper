@@ -15,15 +15,33 @@ import com.wallpaper.tim.phoneinsidewallpaper.Set.Setting;
  */
 public class WidgetTool {
 
-    private int stroke_w,  widgetH;
+    //筆劃粗細 （單位是Pixel）
+    private int stroke_w;
+
+    //小工具的高度 （單位是Pixel）
+    private int widgetH;
+
+    //小圓形的高度 （單位是Pixel）
     private float smaller_stroke_w;
 
+    //一個空心圓要被切成幾段。預設值是十段
     private int SPLIT = 10;
 
+    //用來繪製的畫布物件
     private Canvas canvas;
     private Bitmap bmp;
 
+    //外層大圓範圍 與 內層小圓範圍
     private RectF percentRectF ,splitRectF;
+
+    //主要畫筆 與 繪製指針區域的畫筆
+    private Paint paint ,selectPaint;
+
+    //360-(間隔數量*間隔角度)
+    private float totalUnitDegree;
+
+    //單一餅皮的所需角度
+    private float unitDegree;
 
 
     public WidgetTool(Context context,String color, int w_InDP){
@@ -57,8 +75,7 @@ public class WidgetTool {
         splitRectF = new RectF(margin, margin, canvas.getWidth() - margin, canvas.getHeight() - margin);
     }
 
-    private Paint paint ,selectPaint;
-    private float totalUnitDegree, unitDegree;
+
 
     private void initSplit(String selectColor, String fadeColor) {
         paint = new Paint();

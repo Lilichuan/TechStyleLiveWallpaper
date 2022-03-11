@@ -8,7 +8,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +25,9 @@
             android:name=".TechWallpaperService"
             android:enabled="true"
             android:label="Tech Wallpaper"
-            android:permission="android.permission.BIND_WALLPAPER">
+            android:permission="android.permission.BIND_WALLPAPER"
+            android:externalService="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService" />
             </intent-filter>
@@ -34,7 +37,8 @@
                 android:resource="@xml/wallpaper"/>
         </service>
 
-        <receiver android:name=".Widget.CircleWidgetProvider" >
+        <receiver android:name=".Widget.CircleWidgetProvider"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -42,7 +46,8 @@
                 android:resource="@xml/widget" />
         </receiver>
 
-        <receiver android:name=".Widget.BatteryWidgetProvider" >
+        <receiver android:name=".Widget.BatteryWidgetProvider"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -50,7 +55,8 @@
                 android:resource="@xml/battery_widget" />
         </receiver>
 
-        <receiver android:name=".Widget.WorkWidgetProvider" >
+        <receiver android:name=".Widget.WorkWidgetProvider"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -58,7 +64,8 @@
                 android:resource="@xml/work_body" />
         </receiver>
 
-        <receiver android:name=".Widget.TerminalWidgetProvider" >
+        <receiver android:name=".Widget.TerminalWidgetProvider"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

@@ -3,8 +3,12 @@ package com.wallpaper.tim.phoneinsidewallpaper.UI;
 
 import android.os.Bundle;
 import android.os.Handler;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
+import android.os.Looper;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +55,8 @@ public class DisplayFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        handler = new Handler(Looper.myLooper(), callback);
+
         wallPaperView.setPause(false);
 
         timer = new Timer();
@@ -63,6 +69,14 @@ public class DisplayFragment extends Fragment {
         },200,1000);
     }
 
+    Handler.Callback callback = new Handler.Callback() {
+        @Override
+        public boolean handleMessage(@NonNull Message message) {
+            wallPaperView.invalidate();
+            return false;
+        }
+    };
+
     @Override
     public void onPause() {
         super.onPause();
@@ -74,11 +88,13 @@ public class DisplayFragment extends Fragment {
         }
     }
 
-    private static Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            wallPaperView.invalidate();
-            super.handleMessage(msg);
-        }
-    };
+    private Handler handler;
+
+//    private Handler handler = new Handler(){
+//        @Override
+//        public void handleMessage(Message msg) {
+//            wallPaperView.invalidate();
+//            super.handleMessage(msg);
+//        }
+//    };
 }

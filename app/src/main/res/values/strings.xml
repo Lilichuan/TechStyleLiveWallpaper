@@ -11,6 +11,10 @@
     <string name="secondLayerSplitCount">Second circle display count:%d</string>
     <string name="setting">Setting</string>
 
+    <string name="got_it">Got it</string>
+    <string name="wallpaper_permission_explain">Need permission to use live wallpaper</string>
+
+
     <string name="circle_color">Circle color</string>
 
     <string name="color_green">Green</string>

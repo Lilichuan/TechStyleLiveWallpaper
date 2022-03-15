@@ -28,5 +28,9 @@
 
     <string name="terminal_text_size">終端機文字大小</string>
     <string name="terminal_text_color">終端機文字顏色</string>
+    <string name="display_error">Display easter agg</string>
+
+    <string name="got_it">Got it</string>
+    <string name="wallpaper_permission_explain">需要權限才可以使用動態桌布</string>
 
 </resources>
